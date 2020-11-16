@@ -33,14 +33,14 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
         private val binding = ItemCountryBinding.bind(itemView)
 
         fun bind(country: Country) {
-            setCountryImage()
+            setCountryImage(country)
             binding.countryName.text = country.name
-            binding.countryLocation.text = country.location
+            binding.countryLocation.text = country.region
         }
 
-        private fun setCountryImage() {
+        private fun setCountryImage(country: Country) {
             Glide.with(itemView.context)
-                .load(R.drawable.ic_launcher_background)
+                .load(country.imageUrl)
                 .placeholder(R.drawable.ic_launcher_background)
                 .centerCrop()
                 .into(binding.countryImageView)

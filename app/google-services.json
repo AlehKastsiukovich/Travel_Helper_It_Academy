@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "423677358269",
+    "firebase_url": "https://travelhelper-ae71f.firebaseio.com",
+    "project_id": "travelhelper-ae71f",
+    "storage_bucket": "travelhelper-ae71f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423677358269:android:fb6a06eff06785a1d787d4",
+        "android_client_info": {
+          "package_name": "by.itacademy.training.travelhelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423677358269-b3i2s9kk5bkn5lhb2tc9mmcegh6rdb2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "by.itacademy.training.travelhelper",
+            "certificate_hash": "05a2425f04ab494486dd6d8361dc7faa12da52f0"
+          }
+        },
+        {
+          "client_id": "423677358269-ir38dnsefhuo9a57fohl762ue6npagik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4hK6fV60yFkBj-5bq8FoFaWEbjc5hK0w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423677358269-ir38dnsefhuo9a57fohl762ue6npagik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

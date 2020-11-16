@@ -1,12 +1,16 @@
 package by.itacademy.training.travelhelper.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "countries")
+const val ROOM_COUNTRIES_TABLE_NAME = "countries"
+
+@Entity(tableName = ROOM_COUNTRIES_TABLE_NAME)
 data class Country(
-    val name: String = "Country",
-    val location: String = "Europe",
-    val description: String = "No",
-    val imageUrl: String = "",
-    val population: Int = 10
-)
+    @PrimaryKey val name: String,
+    val region: String,
+    val description: String,
+    val imageUrl: String,
+) {
+    constructor() : this("Default", "Default", "Default", "Default")
+}

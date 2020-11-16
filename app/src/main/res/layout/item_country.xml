@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/country_example"
+            android:layout_marginStart="5dp"
             android:textSize="18sp" />
 
         <TextView
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/location_example"
             android:textSize="15sp"
+            android:layout_marginStart="5dp"
             app:drawableStartCompat="@drawable/ic_baseline_location_on_24" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -12,15 +12,15 @@ abstract class CountriesRoomDatabase : RoomDatabase() {
     abstract fun countriesDao(): CountriesDao
 
     companion object {
+        private const val ROOM_DATABASE_NAME = "countries_database"
         private val INSTANCE: CountriesRoomDatabase? = null
 
         fun getDatabase(context: Context): CountriesRoomDatabase {
-            return INSTANCE
-                ?: Room.databaseBuilder(
-                    context,
-                    CountriesRoomDatabase::class.java,
-                    "countries_database"
-                ).build()
+            return INSTANCE ?: Room.databaseBuilder(
+                context,
+                CountriesRoomDatabase::class.java,
+                ROOM_DATABASE_NAME
+            ).build()
         }
     }
 }

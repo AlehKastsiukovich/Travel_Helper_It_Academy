@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TravelHelper</string>
+    <string name="app_name">Traveler</string>
     <string name="country_example">Country example</string>
     <string name="location_example">Location example</string>
 </resources>
