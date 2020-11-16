@@ -9,7 +9,8 @@ import by.itacademy.training.travelhelper.databinding.ItemCountryBinding
 import by.itacademy.training.travelhelper.entity.Country
 import com.bumptech.glide.Glide
 
-class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
     private val countryList = mutableListOf<Country>()
 
@@ -19,6 +20,9 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onItemClick(countryList[position])
+        }
         holder.bind(countryList[position])
     }
 
@@ -45,5 +49,9 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
                 .centerCrop()
                 .into(binding.countryImageView)
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(country: Country)
     }
 }
