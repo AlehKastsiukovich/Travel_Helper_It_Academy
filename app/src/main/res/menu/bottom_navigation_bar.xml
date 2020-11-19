@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/countryDescription" android:title="Description" />
+    <item android:id="@+id/countryInfoVideoList" android:title="Video" />
+    <item android:id="@+id/routes" android:title="Routs" />
+</menu>
