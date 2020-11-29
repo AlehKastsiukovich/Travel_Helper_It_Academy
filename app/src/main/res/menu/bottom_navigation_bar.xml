@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/countryDescription" android:title="Description" />
-    <item android:id="@+id/countryInfoVideoList" android:title="Video" />
-    <item android:id="@+id/routes" android:title="Routs" />
+    <item
+        android:id="@+id/countryDescription"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:enabled="true"
+        android:title="@string/about_menu" />
+    <item
+        android:id="@+id/countryInfoVideoList"
+        android:icon="@drawable/ic_baseline_video_library_24"
+        android:enabled="true"
+        android:title="@string/video_menu" />
+    <item
+        android:id="@+id/routes"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:enabled="true"
+        android:title="@string/routs_menu" />
 </menu>

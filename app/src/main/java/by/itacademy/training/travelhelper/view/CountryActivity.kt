@@ -21,6 +21,7 @@ class CountryActivity : AppCompatActivity() {
 
         setUpFragments()
         onNavigationBarItemSelected()
+        setUpActionBar()
     }
 
     private fun setUpFragments() {
@@ -29,12 +30,17 @@ class CountryActivity : AppCompatActivity() {
         routeListFragment = RouteListFragment()
         currentFragment = countryDescriptionFragment
 
-        supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentsContainer, countryDescriptionFragment).addToBackStack(null)
-            add(R.id.fragmentsContainer, routeListFragment).hide(routeListFragment).addToBackStack(null)
-            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment).addToBackStack(null)
+        supportFragmentManager.beginTransaction().run {
+            add(R.id.fragmentsContainer, countryDescriptionFragment)
+            add(R.id.fragmentsContainer, routeListFragment).hide(routeListFragment)
+            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment)
             commit()
         }
+    }
+
+    private fun setUpActionBar() {
+        setSupportActionBar(binding.appToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun onNavigationBarItemSelected() {
@@ -49,7 +55,7 @@ class CountryActivity : AppCompatActivity() {
     }
 
     private fun setCurrentFragment(openFragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
+        supportFragmentManager.beginTransaction().run {
             hide(currentFragment)
             show(openFragment)
             commit()

@@ -27,12 +27,17 @@ class MainActivity : AppCompatActivity(), CountryAdapter.OnItemClickListener {
         countryListViewModel = ViewModelProvider(this).get(CountryListViewModel::class.java)
 
         setUpRecyclerView()
+        setUpActionBar()
     }
 
     override fun onItemClick(country: Country) {
         val intent = Intent(this, CountryActivity::class.java)
         intent.putExtra(SERIALIZABLE_COUNTRY_OBJECT_EXTRA, country)
         startActivity(intent)
+    }
+
+    private fun setUpActionBar() {
+        setSupportActionBar(binding.appToolbar)
     }
 
     private fun setUpRecyclerView() {

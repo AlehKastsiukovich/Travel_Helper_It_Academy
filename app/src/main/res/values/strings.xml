@@ -7,4 +7,11 @@
     <string name="name">Name</string>
     <string name="region">Region</string>
     <string name="default_txt">Default</string>
+    <string name="about_menu">About</string>
+    <string name="video_menu">Video</string>
+    <string name="routs_menu">Routs</string>
+    <string name="countries">Countries</string>
+    <string name="travel_helper">Travel Helper</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="country_info">Country Info</string>
 </resources>
