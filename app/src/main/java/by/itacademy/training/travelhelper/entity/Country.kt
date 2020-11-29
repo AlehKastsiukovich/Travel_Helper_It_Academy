@@ -12,7 +12,17 @@ data class Country(
     val region: String,
     val description: String,
     val imageUrl: String,
-    val descriptionImageUrl: String
+    val descriptionImageUrl: String,
+    val capital: String,
+    val language: String
 ) : Serializable {
-    constructor() : this("Default", "Default", "Default", "Default", "Default")
+    constructor() : this(
+        "Default",
+        "Default",
+        "Default",
+        "Default",
+        "Default",
+        "Default",
+        "Default"
+    )
 }

@@ -31,6 +31,8 @@ class CountryDescriptionFragment : Fragment() {
             .into(binding.countryDescriptionImage)
         binding.countryText.text = country?.name
         binding.regionText.text = country?.region
+        binding.capitalTextView.text = country?.capital
+        binding.countryLanguageTextView.text = country?.language
         binding.countryDescriptionText.text = country?.description
     }
 

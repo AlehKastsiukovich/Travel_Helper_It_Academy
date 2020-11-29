@@ -14,4 +14,7 @@
     <string name="travel_helper">Travel Helper</string>
     <string name="additional_information">Additional Information</string>
     <string name="country_info">Country Info</string>
+    <string name="capital">Capital:</string>
+    <string name="language">Language:</string>
+    <string name="location">Location:</string>
 </resources>
