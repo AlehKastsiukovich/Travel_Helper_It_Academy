@@ -38,14 +38,15 @@ class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
 
         fun bind(country: Country) {
             setCountryImage(country)
-            binding.countryName.text = country.name
-            binding.countryLocation.text = country.region
+            with(binding) {
+                countryName.text = country.name
+                countryLocation.text = country.region
+            }
         }
 
         private fun setCountryImage(country: Country) {
             Glide.with(itemView.context)
                 .load(country.imageUrl)
-                .placeholder(R.drawable.ic_launcher_background)
                 .centerCrop()
                 .into(binding.countryImageView)
         }

@@ -9,8 +9,6 @@ import com.google.firebase.ktx.Firebase
 
 class CountriesRepository(private val countriesDao: CountriesDao) {
 
-    val countries: LiveData<List<Country>> = countriesDao.getAllCountries()
-
     fun getCountriesFromFireStore(): LiveData<List<Country>> {
         val database = Firebase.firestore
         val countryList = MutableLiveData<List<Country>>()

@@ -29,11 +29,13 @@ class CountryDescriptionFragment : Fragment() {
             .load(country?.descriptionImageUrl)
             .centerCrop()
             .into(binding.countryDescriptionImage)
-        binding.countryText.text = country?.name
-        binding.regionText.text = country?.region
-        binding.capitalTextView.text = country?.capital
-        binding.countryLanguageTextView.text = country?.language
-        binding.countryDescriptionText.text = country?.description
+        with(binding) {
+            countryText.text = country?.name
+            regionText.text = country?.region
+            capitalTextView.text = country?.capital
+            countryLanguageTextView.text = country?.language
+            countryDescriptionText.text = country?.description
+        }
     }
 
     private fun getCountryObjectFromCountryListFragment(): Country? {

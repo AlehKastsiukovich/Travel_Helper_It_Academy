@@ -1,12 +1,10 @@
 package by.itacademy.training.travelhelper.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.FragmentVideoListBinding
@@ -32,7 +30,7 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
         setUpAdapter()
         model.videoList.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 videoListAdapter.setVideoList(it.items)
             }
         )
@@ -45,7 +43,6 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
     }
 
     override fun listen(item: Item, youTubePlayerView: YouTubePlayerView) {
-        Log.d("TAG", item.id.videoId)
         lifecycle.addObserver(youTubePlayerView)
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {

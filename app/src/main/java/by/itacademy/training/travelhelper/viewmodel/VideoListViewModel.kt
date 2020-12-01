@@ -16,3 +16,20 @@ class VideoListViewModel : ViewModel() {
         emit(videoList)
     }
 }
+
+// interface Dao {
+//    fun getContacts():List<Something>
+// }
+// abstract class Rep(private val dao: Dao) {
+//    abstract fun getContacts():List<Something>
+// }
+// class OtherRepIml(private val dao: Dao) : Rep(dao) {
+//    override fun getContacts(): List<Something> {
+//        TODO("Not yet implemented")
+//    }
+// }
+// class RxRepImpl(private val dao: Dao) : Rep(dao){
+//    override fun getContacts(): List<Something>  {  //тут должен быть observable
+//        TODO("Not yet implemented")
+//    }
+// }

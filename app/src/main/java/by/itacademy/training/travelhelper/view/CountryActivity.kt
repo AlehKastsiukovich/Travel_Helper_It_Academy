@@ -13,6 +13,7 @@ class CountryActivity : AppCompatActivity() {
     private lateinit var countryDescriptionFragment: CountryDescriptionFragment
     private lateinit var videoListFragment: VideoListFragment
     private lateinit var routeListFragment: RouteListFragment
+    private lateinit var mapsFragment: MapsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +29,12 @@ class CountryActivity : AppCompatActivity() {
         countryDescriptionFragment = CountryDescriptionFragment()
         videoListFragment = VideoListFragment()
         routeListFragment = RouteListFragment()
+        mapsFragment = MapsFragment()
         currentFragment = countryDescriptionFragment
 
-        supportFragmentManager.beginTransaction().run {
+        supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentsContainer, countryDescriptionFragment)
-            add(R.id.fragmentsContainer, routeListFragment).hide(routeListFragment)
+            add(R.id.fragmentsContainer, mapsFragment).hide(mapsFragment)
             add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment)
             commit()
         }
@@ -48,14 +50,14 @@ class CountryActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.countryDescription -> setCurrentFragment(countryDescriptionFragment)
                 R.id.countryInfoVideoList -> setCurrentFragment(videoListFragment)
-                R.id.routes -> setCurrentFragment(routeListFragment)
+                R.id.routes -> setCurrentFragment(mapsFragment)
             }
             true
         }
     }
 
     private fun setCurrentFragment(openFragment: Fragment) {
-        supportFragmentManager.beginTransaction().run {
+        supportFragmentManager.beginTransaction().apply {
             hide(currentFragment)
             show(openFragment)
             commit()
