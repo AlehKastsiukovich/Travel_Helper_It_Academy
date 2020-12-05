@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".view.CountryDescriptionFragment">
+    tools:context=".ui.view.CountryDescriptionFragment">
 
     <TextView
         android:id="@+id/countryText"

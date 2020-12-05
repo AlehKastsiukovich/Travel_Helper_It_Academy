@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.view
+package by.itacademy.training.travelhelper.ui.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.FragmentVideoListBinding
-import by.itacademy.training.travelhelper.entity.Item
-import by.itacademy.training.travelhelper.view.adapter.VideoListAdapter
-import by.itacademy.training.travelhelper.viewmodel.VideoListViewModel
+import by.itacademy.training.travelhelper.model.entity.Item
+import by.itacademy.training.travelhelper.ui.adapter.VideoListAdapter
+import by.itacademy.training.travelhelper.ui.viewmodel.VideoListViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView

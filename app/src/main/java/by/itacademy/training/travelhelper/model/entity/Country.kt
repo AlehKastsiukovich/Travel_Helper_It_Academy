@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.entity
+package by.itacademy.training.travelhelper.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

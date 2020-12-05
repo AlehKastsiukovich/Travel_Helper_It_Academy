@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.view
+package by.itacademy.training.travelhelper.ui.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
-import by.itacademy.training.travelhelper.entity.Country
+import by.itacademy.training.travelhelper.model.entity.Country
 import com.bumptech.glide.Glide
 
 class CountryDescriptionFragment : Fragment() {

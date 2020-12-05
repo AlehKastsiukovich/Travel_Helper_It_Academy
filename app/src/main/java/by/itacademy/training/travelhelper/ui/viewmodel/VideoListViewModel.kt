@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.viewmodel
+package by.itacademy.training.travelhelper.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData

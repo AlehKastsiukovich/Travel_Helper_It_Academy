@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.view.adapter
+package by.itacademy.training.travelhelper.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemVideoBinding
-import by.itacademy.training.travelhelper.entity.Item
+import by.itacademy.training.travelhelper.model.entity.Item
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener) :

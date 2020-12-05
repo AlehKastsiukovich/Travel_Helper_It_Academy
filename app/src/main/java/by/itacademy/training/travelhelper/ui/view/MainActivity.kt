@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.view
+package by.itacademy.training.travelhelper.ui.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.ActivityMainBinding
-import by.itacademy.training.travelhelper.entity.Country
-import by.itacademy.training.travelhelper.view.adapter.CountryAdapter
-import by.itacademy.training.travelhelper.viewmodel.CountryListViewModel
+import by.itacademy.training.travelhelper.model.entity.Country
+import by.itacademy.training.travelhelper.ui.adapter.CountryAdapter
+import by.itacademy.training.travelhelper.ui.viewmodel.CountryListViewModel
 
 const val SERIALIZABLE_COUNTRY_OBJECT_EXTRA = "serializableCountry"
 

@@ -1,9 +1,9 @@
-package by.itacademy.training.travelhelper.viewmodel
+package by.itacademy.training.travelhelper.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import by.itacademy.training.travelhelper.entity.Country
+import by.itacademy.training.travelhelper.model.entity.Country
 import by.itacademy.training.travelhelper.model.CountriesRoomDatabase
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
 

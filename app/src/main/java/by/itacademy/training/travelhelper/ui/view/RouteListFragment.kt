@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.view
+package by.itacademy.training.travelhelper.ui.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

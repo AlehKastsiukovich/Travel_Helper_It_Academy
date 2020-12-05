@@ -1,6 +1,6 @@
 package by.itacademy.training.travelhelper.model.api
 
-import by.itacademy.training.travelhelper.entity.VideoList
+import by.itacademy.training.travelhelper.model.entity.VideoList
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

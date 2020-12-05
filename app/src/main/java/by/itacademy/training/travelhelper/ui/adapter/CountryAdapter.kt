@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.view.adapter
+package by.itacademy.training.travelhelper.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemCountryBinding
-import by.itacademy.training.travelhelper.entity.Country
+import by.itacademy.training.travelhelper.model.entity.Country
 import com.bumptech.glide.Glide
 
 class CountryAdapter(private val onItemClickListener: OnItemClickListener) :

@@ -3,7 +3,7 @@ package by.itacademy.training.travelhelper.model
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import by.itacademy.training.travelhelper.entity.Country
+import by.itacademy.training.travelhelper.model.entity.Country
 
 @Dao
 interface CountriesDao {
