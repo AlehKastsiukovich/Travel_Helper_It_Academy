@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.model
+package by.itacademy.training.travelhelper.model.db
 
 import android.content.Context
 import androidx.room.Database

@@ -2,8 +2,8 @@ package by.itacademy.training.travelhelper.model.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import by.itacademy.training.travelhelper.model.db.CountriesDao
 import by.itacademy.training.travelhelper.model.entity.Country
-import by.itacademy.training.travelhelper.model.CountriesDao
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

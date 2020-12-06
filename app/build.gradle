@@ -28,6 +28,7 @@ android {
             file("../secure.properties")?.withInputStream { secureProps.load(it) }
         }
         resValue "string", "maps_api_key", (secureProps.getProperty("MAPS_API_KEY") ?: "")
+        resValue "string", "youtube_api_key", (secureProps.getProperty("YOUTUBE_API_KEY" ?: ""))
     }
 
     buildTypes {
@@ -46,6 +47,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.dagger:dagger:2.27'
+    kapt 'com.google.dagger:dagger-compiler:2.27'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
