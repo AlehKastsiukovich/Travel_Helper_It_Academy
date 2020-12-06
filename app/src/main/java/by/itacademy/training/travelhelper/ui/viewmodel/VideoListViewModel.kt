@@ -1,35 +1,25 @@
 package by.itacademy.training.travelhelper.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.liveData
 import by.itacademy.training.travelhelper.model.api.YoutubeApi
 import by.itacademy.training.travelhelper.model.repository.VideoListRepository
+import by.itacademy.training.travelhelper.ui.app.App
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class VideoListViewModel : ViewModel() {
+class VideoListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val api: YoutubeApi = YoutubeApi.getYoutubeApi()
-    private val repository: VideoListRepository = VideoListRepository(api)
+    @Inject lateinit var api: YoutubeApi
+    @Inject lateinit var repository: VideoListRepository
+
+    init {
+        (application as App).appComponent.inject(this)
+    }
 
     val videoList = liveData(Dispatchers.IO) {
         val videoList = repository.getVideos()
         emit(videoList)
     }
 }
-
-// interface Dao {
-//    fun getContacts():List<Something>
-// }
-// abstract class Rep(private val dao: Dao) {
-//    abstract fun getContacts():List<Something>
-// }
-// class OtherRepIml(private val dao: Dao) : Rep(dao) {
-//    override fun getContacts(): List<Something> {
-//        TODO("Not yet implemented")
-//    }
-// }
-// class RxRepImpl(private val dao: Dao) : Rep(dao){
-//    override fun getContacts(): List<Something>  {  //тут должен быть observable
-//        TODO("Not yet implemented")
-//    }
-// }

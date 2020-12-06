@@ -6,8 +6,9 @@ import by.itacademy.training.travelhelper.model.db.CountriesDao
 import by.itacademy.training.travelhelper.model.entity.Country
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
-class CountriesRepository(private val countriesDao: CountriesDao) {
+class CountriesRepository @Inject constructor(private val countriesDao: CountriesDao) {
 
     fun getCountriesFromFireStore(): LiveData<List<Country>> {
         val database = Firebase.firestore

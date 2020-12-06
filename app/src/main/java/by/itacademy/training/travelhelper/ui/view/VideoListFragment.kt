@@ -27,6 +27,11 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentVideoListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUpAdapter()
         model.videoList.observe(
             viewLifecycleOwner,
@@ -34,7 +39,6 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
                 videoListAdapter.setVideoList(it.items)
             }
         )
-        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -19,9 +19,13 @@ class CountryDescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCountryDescriptionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val country = getCountryObjectFromCountryListFragment()
         setUpFragmentView(country)
-        return binding.root
     }
 
     private fun setUpFragmentView(country: Country?) {
