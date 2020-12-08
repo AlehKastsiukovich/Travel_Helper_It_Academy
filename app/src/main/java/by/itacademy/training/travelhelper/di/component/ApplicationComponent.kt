@@ -8,6 +8,7 @@ import by.itacademy.training.travelhelper.di.module.RoomModule
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryListViewModel
 import by.itacademy.training.travelhelper.ui.viewmodel.VideoListViewModel
 import dagger.Component
+import javax.inject.Singleton
 
 @Component(
     modules = [
@@ -15,6 +16,7 @@ import dagger.Component
         ActivityContextModule::class, RoomModule::class
     ]
 )
+@Singleton
 interface ApplicationComponent {
 
     fun inject(videoListViewModel: VideoListViewModel)

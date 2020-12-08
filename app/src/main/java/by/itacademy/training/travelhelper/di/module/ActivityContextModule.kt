@@ -5,11 +5,13 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 class ActivityContextModule(private val context: Activity) {
 
+    @Singleton
     @Named("activityContext")
     @Provides
-    fun context(): Context = context
+    fun provideContext(): Context = context
 }

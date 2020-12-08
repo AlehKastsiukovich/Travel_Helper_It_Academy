@@ -1,11 +1,12 @@
 package by.itacademy.training.travelhelper.ui.app
 
-import android.app.Application
 import by.itacademy.training.travelhelper.di.component.ApplicationComponent
 import by.itacademy.training.travelhelper.di.component.DaggerApplicationComponent
 import by.itacademy.training.travelhelper.di.module.ApplicationContextModule
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class App : Application() {
+class App : DaggerApplication() {
 
     lateinit var appComponent: ApplicationComponent
 
@@ -15,5 +16,9 @@ class App : Application() {
             .builder()
             .applicationContextModule(ApplicationContextModule(this))
             .build()
+    }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        TODO("Not yet implemented")
     }
 }

@@ -12,6 +12,7 @@ import javax.inject.Inject
 class CountryListViewModel(application: Application) : AndroidViewModel(application) {
 
     @Inject lateinit var repository: CountriesRepository
+
     val countries: LiveData<List<Country>>
         get() = _countries
     private var _countries = MutableLiveData<List<Country>>()

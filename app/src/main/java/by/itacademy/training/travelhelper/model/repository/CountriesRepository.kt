@@ -17,6 +17,7 @@ class CountriesRepository @Inject constructor(private val countriesDao: Countrie
             .addOnSuccessListener {
                 countryList.postValue(it.toObjects(Country::class.java))
             }
+
         return countryList
     }
 

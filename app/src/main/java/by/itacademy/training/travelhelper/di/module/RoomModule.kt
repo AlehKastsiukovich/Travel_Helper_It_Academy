@@ -6,10 +6,12 @@ import by.itacademy.training.travelhelper.model.db.CountriesRoomDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 class RoomModule {
 
+    @Singleton
     @Provides
     fun provideCountriesDao(@Named("applicationContext") context: Context): CountriesRoomDatabase {
         return Room.databaseBuilder(

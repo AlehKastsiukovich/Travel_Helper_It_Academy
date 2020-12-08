@@ -33,7 +33,7 @@ class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener)
     }
 
     class VideoListViewHolder(
-        private val itemView: View,
+        itemView: View,
         private val youtubePlayerListener: YoutubePlayerListener
     ) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemVideoBinding.bind(itemView)
