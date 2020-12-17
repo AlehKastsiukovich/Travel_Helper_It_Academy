@@ -1,9 +1,8 @@
 package by.itacademy.training.travelhelper.model.repository
 
-import by.itacademy.training.travelhelper.model.api.YoutubeApi
-import javax.inject.Inject
+import by.itacademy.training.travelhelper.model.entity.VideoList
 
-class VideoListRepository @Inject constructor(private val api: YoutubeApi) {
+interface VideoListRepository {
 
-    suspend fun getVideos() = api.getVideos("China travelling")
+    suspend fun getVideos(): VideoList
 }

@@ -1,23 +1,18 @@
 package by.itacademy.training.travelhelper.di.module
 
-import by.itacademy.training.travelhelper.model.api.YoutubeApi
-import by.itacademy.training.travelhelper.model.db.CountriesRoomDatabase
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
+import by.itacademy.training.travelhelper.model.repository.CountriesRepositoryImpl
 import by.itacademy.training.travelhelper.model.repository.VideoListRepository
+import by.itacademy.training.travelhelper.model.repository.VideoListRepositoryImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
 
 @Module
-class RepositoryModule {
+interface RepositoryModule {
 
-    @Singleton
-    @Provides
-    fun provideVideoListRepository(api: YoutubeApi) = VideoListRepository(api)
+    @Binds
+    fun provideCountriesRepository(repository: CountriesRepositoryImpl): CountriesRepository
 
-    @Singleton
-    @Provides
-    fun provideCountriesRepository(database: CountriesRoomDatabase): CountriesRepository {
-        return CountriesRepository(database.countriesDao())
-    }
+    @Binds
+    fun provideVideoListRepository(repository: VideoListRepositoryImpl): VideoListRepository
 }

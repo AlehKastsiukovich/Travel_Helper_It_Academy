@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class ApplicationContextModule(private val context: Context) {
 
     @Singleton
-    @Named("applicationContext")
     @Provides
-    fun context(): Context = context.applicationContext
+    @Named("applicationContext")
+    fun provideContext(): Context = context.applicationContext
 }

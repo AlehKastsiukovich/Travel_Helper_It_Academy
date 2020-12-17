@@ -33,17 +33,17 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpAdapter()
+        model = ViewModelProvider(this).get(VideoListViewModel::class.java)
+        observeVideoList()
+    }
+
+    private fun observeVideoList() {
         model.videoList.observe(
             viewLifecycleOwner,
             {
                 videoListAdapter.setVideoList(it.items)
             }
         )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        model = ViewModelProvider(this).get(VideoListViewModel::class.java)
     }
 
     override fun listen(item: Item, youTubePlayerView: YouTubePlayerView) {
