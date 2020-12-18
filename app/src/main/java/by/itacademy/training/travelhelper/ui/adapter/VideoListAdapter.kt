@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemVideoBinding
-import by.itacademy.training.travelhelper.model.entity.Item
+import by.itacademy.training.travelhelper.model.dto.ItemDto
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener) :
     RecyclerView.Adapter<VideoListAdapter.VideoListViewHolder>() {
 
-    private var videoList = listOf<Item>()
+    private var videoList = listOf<ItemDto>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoListViewHolder {
         return VideoListViewHolder(
@@ -27,7 +27,7 @@ class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener)
 
     override fun getItemCount() = videoList.size
 
-    fun setVideoList(videoList: List<Item>) {
+    fun setVideoList(videoList: List<ItemDto>) {
         this.videoList = videoList
         notifyDataSetChanged()
     }
@@ -40,13 +40,13 @@ class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener)
         private val player = binding.youtubePlayer
         private val title = binding.videoTitleTextView
 
-        fun bind(item: Item) {
+        fun bind(item: ItemDto) {
             youtubePlayerListener.listen(item, player)
             title.text = item.snippet.title
         }
     }
 
     interface YoutubePlayerListener {
-        fun listen(item: Item, youTubePlayerView: YouTubePlayerView)
+        fun listen(item: ItemDto, youTubePlayerView: YouTubePlayerView)
     }
 }

@@ -1,39 +1,44 @@
 package by.itacademy.training.travelhelper.ui.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.ActivityMainBinding
-import by.itacademy.training.travelhelper.model.entity.Country
+import by.itacademy.training.travelhelper.model.dto.CountryDto
 import by.itacademy.training.travelhelper.ui.adapter.CountryAdapter
-import by.itacademy.training.travelhelper.ui.viewmodel.CountryListViewModel
+import by.itacademy.training.travelhelper.ui.adapter.OnCountryItemClickListener
+import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.ui.viewmodel.CountriesListViewModel
+import javax.inject.Inject
 
-const val SERIALIZABLE_COUNTRY_OBJECT_EXTRA = "serializableCountry"
+class MainActivity : AppCompatActivity(), OnCountryItemClickListener {
 
-class MainActivity : AppCompatActivity(), CountryAdapter.OnItemClickListener {
+    @Inject lateinit var countriesListViewModel: CountriesListViewModel
+    @Inject lateinit var countryAdapter: CountryAdapter
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var countryListViewModel: CountryListViewModel
-    private lateinit var countryAdapter: CountryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        inject()
         setContentView(binding.root)
-
-        countryListViewModel = ViewModelProvider(this).get(CountryListViewModel::class.java)
 
         setUpRecyclerView()
         setUpActionBar()
+        observeCountriesList()
     }
 
-    override fun onItemClick(country: Country) {
-        val intent = Intent(this, CountryActivity::class.java)
-        intent.putExtra(SERIALIZABLE_COUNTRY_OBJECT_EXTRA, country)
-        startActivity(intent)
+    override fun onItemClick(country: CountryDto) {
+    }
+
+    private fun inject() {
+        (application as App).appComponent
+            .mainActivitySubComponentBuilder()
+            .with(this)
+            .build()
+            .inject(this)
     }
 
     private fun setUpActionBar() {
@@ -41,20 +46,15 @@ class MainActivity : AppCompatActivity(), CountryAdapter.OnItemClickListener {
     }
 
     private fun setUpRecyclerView() {
-        countryAdapter = CountryAdapter(this)
-        observe()
         binding.countriesRecyclerView.apply {
             adapter = countryAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
     }
 
-    private fun observe() {
-        countryListViewModel.countries.observe(
-            this,
-            Observer {
-                countryAdapter.addCountries(it)
-            }
+    private fun observeCountriesList() {
+        countriesListViewModel.countries.observe(
+            this, Observer { countryAdapter.addCountries(it) }
         )
     }
 }

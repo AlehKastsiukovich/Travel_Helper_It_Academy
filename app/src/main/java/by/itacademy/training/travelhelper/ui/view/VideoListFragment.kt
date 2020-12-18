@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.FragmentVideoListBinding
-import by.itacademy.training.travelhelper.model.entity.Item
+import by.itacademy.training.travelhelper.model.dto.ItemDto
 import by.itacademy.training.travelhelper.ui.adapter.VideoListAdapter
 import by.itacademy.training.travelhelper.ui.viewmodel.VideoListViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -46,7 +46,7 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
         )
     }
 
-    override fun listen(item: Item, youTubePlayerView: YouTubePlayerView) {
+    override fun listen(item: ItemDto, youTubePlayerView: YouTubePlayerView) {
         lifecycle.addObserver(youTubePlayerView)
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {

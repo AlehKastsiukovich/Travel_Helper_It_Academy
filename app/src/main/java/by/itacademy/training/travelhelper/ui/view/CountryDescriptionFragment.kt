@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
-import by.itacademy.training.travelhelper.model.entity.Country
+import by.itacademy.training.travelhelper.model.dto.CountryDto
 import com.bumptech.glide.Glide
 
 class CountryDescriptionFragment : Fragment() {
@@ -28,7 +28,7 @@ class CountryDescriptionFragment : Fragment() {
         setUpFragmentView(country)
     }
 
-    private fun setUpFragmentView(country: Country?) {
+    private fun setUpFragmentView(country: CountryDto?) {
         Glide.with(this)
             .load(country?.descriptionImageUrl)
             .centerCrop()
@@ -42,7 +42,5 @@ class CountryDescriptionFragment : Fragment() {
         }
     }
 
-    private fun getCountryObjectFromCountryListFragment(): Country? {
-        return activity?.intent?.extras?.getSerializable(SERIALIZABLE_COUNTRY_OBJECT_EXTRA) as Country
-    }
+    private fun getCountryObjectFromCountryListFragment(): CountryDto? = null
 }

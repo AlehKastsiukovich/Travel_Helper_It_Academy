@@ -1,21 +1,26 @@
 package by.itacademy.training.travelhelper.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemCountryBinding
-import by.itacademy.training.travelhelper.model.entity.Country
+import by.itacademy.training.travelhelper.model.dto.CountryDto
 import com.bumptech.glide.Glide
+import javax.inject.Inject
 
-class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
-    RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class CountryAdapter @Inject constructor(
+    private val onItemClickListener: OnCountryItemClickListener
+) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
-    private val countryList = mutableListOf<Country>()
+    private val countryList = mutableListOf<CountryDto>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_country, parent, false)
+        val view: View = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.item_country, parent, false)
         return CountryViewHolder(view)
     }
 
@@ -28,7 +33,8 @@ class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
 
     override fun getItemCount() = countryList.size
 
-    fun addCountries(countries: List<Country>) {
+    fun addCountries(countries: List<CountryDto>) {
+        countryList.clear()
         countryList.addAll(countries)
         notifyDataSetChanged()
     }
@@ -36,7 +42,7 @@ class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemCountryBinding.bind(itemView)
 
-        fun bind(country: Country) {
+        fun bind(country: CountryDto) {
             setCountryImage(country)
             with(binding) {
                 countryName.text = country.name
@@ -44,15 +50,11 @@ class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
             }
         }
 
-        private fun setCountryImage(country: Country) {
+        private fun setCountryImage(country: CountryDto) {
             Glide.with(itemView.context)
                 .load(country.imageUrl)
                 .centerCrop()
                 .into(binding.countryImageView)
         }
-    }
-
-    interface OnItemClickListener {
-        fun onItemClick(country: Country)
     }
 }

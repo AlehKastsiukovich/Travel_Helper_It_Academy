@@ -1,61 +1,61 @@
-package by.itacademy.training.travelhelper.model.entity
+package by.itacademy.training.travelhelper.model.dto
 
-data class VideoList(
+data class VideoListDto(
     val etag: String,
-    val items: List<Item>,
+    val items: List<ItemDto>,
     val kind: String,
     val nextPageToken: String,
-    val pageInfo: PageInfo,
+    val pageInfo: PageInfoDto,
     val regionCode: String
 )
 
-data class Item(
+data class ItemDto(
     val etag: String,
-    val id: Id,
+    val id: IdDto,
     val kind: String,
-    val snippet: Snippet
+    val snippet: SnippetDto
 )
 
-data class Id(
+data class IdDto(
     val kind: String,
     val videoId: String
 )
 
-data class PageInfo(
+data class PageInfoDto(
     val resultsPerPage: Int,
     val totalResults: Int
 )
 
-data class Snippet(
+data class SnippetDto(
     val channelId: String,
     val channelTitle: String,
     val description: String,
     val liveBroadcastContent: String,
     val publishTime: String,
     val publishedAt: String,
-    val thumbnails: Thumbnails,
+    val thumbnails: ThumbnailsDto,
     val title: String
 )
 
-data class Thumbnails(
-    val default: Default,
-    val high: High,
-    val medium: Medium
+data class ThumbnailsDto(
+    val default: DefaultDto,
+    val high: HighDto,
+    val medium: MediumDto
 )
 
-data class Default(
+data class DefaultDto(
     val height: Int,
     val url: String,
     val width: Int
 )
 
-data class High(
+data class HighDto(
     val height: Int,
     val url: String,
     val width: Int
 )
 
-data class Medium(
+data class MediumDto(
     val height: Int,
     val url: String,
     val width: Int
