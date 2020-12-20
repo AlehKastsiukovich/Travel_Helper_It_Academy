@@ -21,7 +21,6 @@ import javax.inject.Singleton
 )
 @Singleton
 interface ApplicationComponent {
-    fun inject(videoListFragment: VideoListFragment)
     fun inject(countryListViewModel: CountriesListViewModel)
     fun inject(videoListViewModel: VideoListViewModel)
     fun inject(countryDescriptionViewModel: CountryDescriptionViewModel)
@@ -29,4 +28,5 @@ interface ApplicationComponent {
 
     fun mainActivitySubComponentBuilder(): MainActivityComponent.Builder
     fun countryActivitySubComponentBuilder(): CountryActivityComponent.Builder
+    fun videoListSubComponentBuilder(): VideoListComponent.Builder
 }

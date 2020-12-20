@@ -9,3 +9,7 @@ annotation class MainActivityScope
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class CountryActivityScope
+
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class VideoListFragmentScope

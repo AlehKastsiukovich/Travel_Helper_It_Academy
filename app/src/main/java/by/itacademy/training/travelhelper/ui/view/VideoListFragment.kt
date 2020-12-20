@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.FragmentVideoListBinding
 import by.itacademy.training.travelhelper.model.dto.ItemDto
 import by.itacademy.training.travelhelper.ui.adapter.VideoListAdapter
+import by.itacademy.training.travelhelper.ui.adapter.YoutubePlayerListener
+import by.itacademy.training.travelhelper.ui.app.App
 import by.itacademy.training.travelhelper.ui.viewmodel.VideoListViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import javax.inject.Inject
 
-class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
+class VideoListFragment : Fragment(), YoutubePlayerListener {
+
+    @Inject lateinit var videoListAdapter: VideoListAdapter
+    @Inject lateinit var model: VideoListViewModel
 
     private lateinit var binding: FragmentVideoListBinding
-    private lateinit var videoListAdapter: VideoListAdapter
-    private lateinit var model: VideoListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,9 +36,18 @@ class VideoListFragment : Fragment(), VideoListAdapter.YoutubePlayerListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        inject()
         setUpAdapter()
-        model = ViewModelProvider(this).get(VideoListViewModel::class.java)
         observeVideoList()
+    }
+
+    private fun inject() {
+        (activity?.application as App)
+            .appComponent
+            .videoListSubComponentBuilder()
+            .with(this)
+            .build()
+            .inject(this)
     }
 
     private fun observeVideoList() {

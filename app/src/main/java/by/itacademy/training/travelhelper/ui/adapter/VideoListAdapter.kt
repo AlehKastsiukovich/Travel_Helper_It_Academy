@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemVideoBinding
+import by.itacademy.training.travelhelper.di.component.VideoListFragmentScope
 import by.itacademy.training.travelhelper.model.dto.ItemDto
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import javax.inject.Inject
 
-class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener) :
-    RecyclerView.Adapter<VideoListAdapter.VideoListViewHolder>() {
+@VideoListFragmentScope
+class VideoListAdapter @Inject constructor(
+    private val youtubePlayerListener: YoutubePlayerListener
+) : RecyclerView.Adapter<VideoListAdapter.VideoListViewHolder>() {
 
     private var videoList = listOf<ItemDto>()
 
@@ -44,9 +47,5 @@ class VideoListAdapter(private val youtubePlayerListener: YoutubePlayerListener)
             youtubePlayerListener.listen(item, player)
             title.text = item.snippet.title
         }
-    }
-
-    interface YoutubePlayerListener {
-        fun listen(item: ItemDto, youTubePlayerView: YouTubePlayerView)
     }
 }

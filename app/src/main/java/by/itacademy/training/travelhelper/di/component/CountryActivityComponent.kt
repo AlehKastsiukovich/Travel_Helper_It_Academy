@@ -7,6 +7,7 @@ import dagger.BindsInstance
 import dagger.Subcomponent
 
 @Subcomponent(modules = [CountryActivityModule::class])
+@CountryActivityScope
 interface CountryActivityComponent {
 
     @Subcomponent.Builder
