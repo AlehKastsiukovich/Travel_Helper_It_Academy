@@ -31,7 +31,7 @@ class CountriesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCountryByName(name: String) = withContext(Dispatchers.IO) {
-        countriesDao.getCountryByName(name)
+        val result = countriesDao.getCountryByName(name)
     }
 
     companion object {
