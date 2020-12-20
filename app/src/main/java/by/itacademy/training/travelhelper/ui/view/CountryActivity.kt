@@ -31,7 +31,8 @@ class CountryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setCurrentCountry()
-        setUpFragments()
+        initFragments()
+        addFragmentsToTransaction()
         onNavigationBarItemSelected()
         setUpActionBar()
     }
@@ -47,13 +48,15 @@ class CountryActivity : AppCompatActivity() {
         component.inject(this)
     }
 
-    private fun setUpFragments() {
+    private fun initFragments() {
         countryDescriptionFragment = CountryDescriptionFragment()
         videoListFragment = VideoListFragment()
         routeListFragment = RouteListFragment()
         mapsFragment = MapsFragment()
         currentFragment = countryDescriptionFragment
+    }
 
+    private fun addFragmentsToTransaction() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentsContainer, countryDescriptionFragment)
             add(R.id.fragmentsContainer, mapsFragment).hide(mapsFragment)
