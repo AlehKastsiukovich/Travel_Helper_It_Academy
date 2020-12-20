@@ -1,28 +1,15 @@
 package by.itacademy.training.travelhelper.model.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import by.itacademy.training.travelhelper.model.db.CountriesDao
 import by.itacademy.training.travelhelper.model.dto.CountryDto
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CountriesRepositoryImpl @Inject constructor(
-    private val firebase: FirebaseFirestore,
-    private val countriesDao: CountriesDao
+    private val countriesDao: CountriesDao,
+    private val countryMapper: CountryMapper
 ) : CountriesRepository {
-
-    override fun getCountriesFromFireStore(): LiveData<List<CountryDto>> {
-        val countryList = MutableLiveData<List<CountryDto>>()
-        firebase.collection(FIRESTORE_COUNTRY_STORAGE).get()
-            .addOnSuccessListener {
-                countryList.postValue(it.toObjects(CountryDto::class.java))
-            }
-
-        return countryList
-    }
 
     override fun getAllCountriesFromDb() = countriesDao.getAllCountries()
 
@@ -31,7 +18,7 @@ class CountriesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCountryByName(name: String) = withContext(Dispatchers.IO) {
-        val result = countriesDao.getCountryByName(name)
+        countryMapper.map(countriesDao.getCountryByName(name))
     }
 
     companion object {

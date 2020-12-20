@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
 import by.itacademy.training.travelhelper.ui.app.App
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class CountryDescriptionViewModel(application: Application) : AndroidViewModel(a
 
     @Inject lateinit var repository: CountriesRepository
 
-    var currentCountry: LiveData<CountryDto> = MutableLiveData<CountryDto>()
+    var currentCountry: LiveData<Country> = MutableLiveData<Country>()
 
     init {
         (application as App).appComponent.inject(this)

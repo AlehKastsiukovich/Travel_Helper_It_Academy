@@ -6,8 +6,6 @@ import by.itacademy.training.travelhelper.model.dto.CountryDto
 
 interface CountriesRepository {
 
-    fun getCountriesFromFireStore(): LiveData<List<CountryDto>>
-
     fun getAllCountriesFromDb(): LiveData<List<CountryDto>>
 
     suspend fun insertCountries(countries: List<CountryDto>)

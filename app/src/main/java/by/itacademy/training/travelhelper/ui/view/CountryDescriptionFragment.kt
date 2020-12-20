@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
+import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.model.dto.CountryDto
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import com.bumptech.glide.Glide
@@ -43,7 +44,7 @@ class CountryDescriptionFragment : Fragment() {
         )
     }
 
-    private fun setDescriptionText(country: CountryDto?) = with(binding) {
+    private fun setDescriptionText(country: Country?) = with(binding) {
         countryText.text = country?.name
         regionText.text = country?.region
         capitalTextView.text = country?.capital
@@ -51,7 +52,7 @@ class CountryDescriptionFragment : Fragment() {
         countryDescriptionText.text = country?.description
     }
 
-    private fun setDescriptionImage(country: CountryDto?) {
+    private fun setDescriptionImage(country: Country?) {
         Glide.with(this)
             .load(country?.descriptionImageUrl)
             .centerCrop()
