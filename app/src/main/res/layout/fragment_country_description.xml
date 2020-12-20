@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,98 +7,104 @@
     android:layout_margin="10dp"
     tools:context=".ui.view.CountryDescriptionFragment">
 
-    <TextView
-        android:id="@+id/countryText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/default_txt"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/countryDescriptionImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryText" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/regionTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/location"
-        android:textSize="16sp"
-        app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryDescriptionImage" />
+        <TextView
+            android:id="@+id/countryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_txt"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/regionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:text="@string/default_txt"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toRightOf="@+id/regionTitleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/countryDescriptionImage" />
+        <ImageView
+            android:id="@+id/countryDescriptionImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countryText" />
 
-    <TextView
-        android:id="@+id/capitalTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/capital"
-        android:textSize="16sp"
-        app:drawableStartCompat="@drawable/ic_baseline_account_balance_24"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regionText" />
+        <TextView
+            android:id="@+id/regionTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/location"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countryDescriptionImage" />
 
-    <TextView
-        android:id="@+id/capitalTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/default_txt"
-        android:layout_marginStart="10dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/capitalTitleTextView"
-        app:layout_constraintLeft_toRightOf="@+id/capitalTitleTextView"
-        app:layout_constraintTop_toTopOf="@+id/capitalTitleTextView" />
+        <TextView
+            android:id="@+id/regionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/default_txt"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/regionTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/countryDescriptionImage" />
 
-    <TextView
-        android:id="@+id/countryLanguageTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/language"
-        android:textSize="16sp"
-        app:drawableStartCompat="@drawable/ic_baseline_language_24"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/capitalTitleTextView" />
+        <TextView
+            android:id="@+id/capitalTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/capital"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_baseline_account_balance_24"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regionText" />
 
-    <TextView
-        android:id="@+id/countryLanguageTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/default_txt"
-        android:textSize="16sp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/countryLanguageTitleTextView"
-        app:layout_constraintLeft_toRightOf="@+id/countryLanguageTitleTextView"
-        app:layout_constraintTop_toTopOf="@+id/countryLanguageTitleTextView" />
+        <TextView
+            android:id="@+id/capitalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_txt"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/capitalTitleTextView"
+            app:layout_constraintLeft_toRightOf="@+id/capitalTitleTextView"
+            app:layout_constraintTop_toTopOf="@+id/capitalTitleTextView" />
 
-    <TextView
-        android:id="@+id/countryDescriptionText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryLanguageTitleTextView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/countryLanguageTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/language"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_baseline_language_24"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/capitalTitleTextView" />
+
+        <TextView
+            android:id="@+id/countryLanguageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_txt"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/countryLanguageTitleTextView"
+            app:layout_constraintLeft_toRightOf="@+id/countryLanguageTitleTextView"
+            app:layout_constraintTop_toTopOf="@+id/countryLanguageTitleTextView" />
+
+        <TextView
+            android:id="@+id/countryDescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countryLanguageTitleTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

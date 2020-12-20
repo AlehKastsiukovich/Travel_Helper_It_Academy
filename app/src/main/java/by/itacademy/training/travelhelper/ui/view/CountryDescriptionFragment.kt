@@ -1,19 +1,21 @@
 package by.itacademy.training.travelhelper.ui.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import by.itacademy.training.travelhelper.R
+import androidx.lifecycle.Observer
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
 import by.itacademy.training.travelhelper.model.dto.CountryDto
-import by.itacademy.training.travelhelper.model.repository.CountriesRepository
-import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 
 class CountryDescriptionFragment : Fragment() {
+
+    @Inject lateinit var model: CountryDescriptionViewModel
 
     private lateinit var binding: FragmentCountryDescriptionBinding
 
@@ -28,38 +30,36 @@ class CountryDescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val country = getCountryObjectFromCountryListFragment()
-        setUpFragmentView(country)
+        setUpFragmentView()
     }
 
-    private fun inject() {
-        activity?.run {
-            (application as App)
-                .appComponent
-                .countryActivitySubComponentBuilder().with(this)
-        }
+    private fun setUpFragmentView() {
+        model.currentCountry.observe(
+            viewLifecycleOwner,
+            Observer {
+                setDescriptionImage(it)
+                setDescriptionText(it)
+            }
+        )
     }
 
-    private fun setUpFragmentView(country: CountryDto?) {
+    private fun setDescriptionText(country: CountryDto?) = with(binding) {
+        countryText.text = country?.name
+        regionText.text = country?.region
+        capitalTextView.text = country?.capital
+        countryLanguageTextView.text = country?.language
+        countryDescriptionText.text = country?.description
+    }
+
+    private fun setDescriptionImage(country: CountryDto?) {
         Glide.with(this)
             .load(country?.descriptionImageUrl)
             .centerCrop()
             .into(binding.countryDescriptionImage)
-        with(binding) {
-            countryText.text = country?.name
-            regionText.text = country?.region
-            capitalTextView.text = country?.capital
-            countryLanguageTextView.text = country?.language
-            countryDescriptionText.text = country?.description
-        }
     }
 
-    private fun getCountryObjectFromCountryListFragment(): CountryDto? {
-        val name = activity?.
-        intent?.
-        extras?.
-        getString(resources.getString(R.string.country_key))
-
-        return
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as CountryActivity).component.inject(this)
     }
 }

@@ -6,7 +6,6 @@ import by.itacademy.training.travelhelper.di.module.NetworkModule
 import by.itacademy.training.travelhelper.di.module.RepositoryModule
 import by.itacademy.training.travelhelper.di.module.RoomModule
 import by.itacademy.training.travelhelper.ui.app.App
-import by.itacademy.training.travelhelper.ui.view.CountryDescriptionFragment
 import by.itacademy.training.travelhelper.ui.view.VideoListFragment
 import by.itacademy.training.travelhelper.ui.viewmodel.CountriesListViewModel
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
