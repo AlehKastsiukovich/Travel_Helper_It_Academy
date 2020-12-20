@@ -19,18 +19,28 @@ class App : Application() {
     @Inject lateinit var firestore: FirebaseFirestore
 
     lateinit var appComponent: ApplicationComponent
+    lateinit var applicationScope: CoroutineScope
 
     override fun onCreate() {
         super.onCreate()
+
+        initApplicationScope()
+        initAppComponent()
+        inject()
+    }
+
+    private fun initAppComponent() {
         appComponent = DaggerApplicationComponent
             .builder()
             .applicationContextModule(ApplicationContextModule(this))
             .build()
+    }
 
-        inject()
+    private fun initApplicationScope() {
+        applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    }
 
-        val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-
+    private fun fetchFirebaseData() {
         firestore.collection(FIRESTORE_COUNTRY_STORAGE).get()
             .addOnSuccessListener {
                 val res = it.toObjects(CountryDto::class.java)
