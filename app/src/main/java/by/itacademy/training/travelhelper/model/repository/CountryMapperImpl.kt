@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class CountryMapperImpl @Inject constructor() : CountryMapper {
 
-    override fun map(countryDto: CountryDto) = countryDto.run {
+    override fun mapSingleCountry(countryDto: CountryDto) = countryDto.run {
         Country(
             name,
             region,
@@ -18,5 +18,13 @@ class CountryMapperImpl @Inject constructor() : CountryMapper {
             capital,
             language
         )
+    }
+
+    override fun mapCountryList(list: List<CountryDto>): List<Country> {
+        val countries = mutableListOf<Country>()
+        list.forEach {
+            countries.add(mapSingleCountry(it))
+        }
+        return countries
     }
 }

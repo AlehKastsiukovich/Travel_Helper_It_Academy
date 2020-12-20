@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ActivityMainBinding
-import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.ui.adapter.CountryAdapter
 import by.itacademy.training.travelhelper.ui.adapter.OnCountryItemClickListener
 import by.itacademy.training.travelhelper.ui.app.App
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), OnCountryItemClickListener {
         observeCountriesList()
     }
 
-    override fun onItemClick(country: CountryDto) {
+    override fun onItemClick(country: Country) {
         val intent = Intent(this, CountryActivity::class.java).apply {
             putExtra(resources.getString(R.string.country_key), country.name)
         }

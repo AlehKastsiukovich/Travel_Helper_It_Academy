@@ -5,5 +5,7 @@ import by.itacademy.training.travelhelper.model.dto.CountryDto
 
 interface CountryMapper {
 
-    fun map(countryDto: CountryDto): Country
+    fun mapSingleCountry(countryDto: CountryDto): Country
+
+    fun mapCountryList(list: List<CountryDto>): List<Country>
 }

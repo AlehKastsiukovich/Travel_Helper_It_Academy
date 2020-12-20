@@ -1,7 +1,8 @@
 package by.itacademy.training.travelhelper.ui.adapter
 
-import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.domain.Country
 
 interface OnCountryItemClickListener {
-    fun onItemClick(country: CountryDto)
+
+    fun onItemClick(country: Country)
 }

@@ -1,14 +1,12 @@
 package by.itacademy.training.travelhelper.model.repository
 
-import androidx.lifecycle.LiveData
 import by.itacademy.training.travelhelper.model.domain.Country
-import by.itacademy.training.travelhelper.model.dto.CountryDto
 
 interface CountriesRepository {
 
-    fun getAllCountriesFromDb(): LiveData<List<CountryDto>>
+    suspend fun getAllCountriesFromDb(): List<Country>
 
-    suspend fun insertCountries(countries: List<CountryDto>)
+    suspend fun insertCountries(countries: List<by.itacademy.training.travelhelper.model.dto.CountryDto>)
 
     suspend fun getCountryByName(name: String): Country
 }
