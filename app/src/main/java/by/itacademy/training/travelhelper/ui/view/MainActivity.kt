@@ -1,9 +1,11 @@
 package by.itacademy.training.travelhelper.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ActivityMainBinding
 import by.itacademy.training.travelhelper.model.dto.CountryDto
 import by.itacademy.training.travelhelper.ui.adapter.CountryAdapter
@@ -31,6 +33,10 @@ class MainActivity : AppCompatActivity(), OnCountryItemClickListener {
     }
 
     override fun onItemClick(country: CountryDto) {
+        val intent = Intent(this, CountryActivity::class.java).apply {
+            putExtra(resources.getString(R.string.country_key), country.name)
+        }
+        startActivity(intent)
     }
 
     private fun inject() {

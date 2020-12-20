@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
 import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.repository.CountriesRepository
+import by.itacademy.training.travelhelper.ui.app.App
 import com.bumptech.glide.Glide
+import javax.inject.Inject
 
 class CountryDescriptionFragment : Fragment() {
 
@@ -28,6 +32,14 @@ class CountryDescriptionFragment : Fragment() {
         setUpFragmentView(country)
     }
 
+    private fun inject() {
+        activity?.run {
+            (application as App)
+                .appComponent
+                .countryActivitySubComponentBuilder().with(this)
+        }
+    }
+
     private fun setUpFragmentView(country: CountryDto?) {
         Glide.with(this)
             .load(country?.descriptionImageUrl)
@@ -42,5 +54,12 @@ class CountryDescriptionFragment : Fragment() {
         }
     }
 
-    private fun getCountryObjectFromCountryListFragment(): CountryDto? = null
+    private fun getCountryObjectFromCountryListFragment(): CountryDto? {
+        val name = activity?.
+        intent?.
+        extras?.
+        getString(resources.getString(R.string.country_key))
+
+        return
+    }
 }

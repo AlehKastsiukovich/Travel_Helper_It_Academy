@@ -10,4 +10,6 @@ interface CountriesRepository {
     fun getAllCountriesFromDb(): LiveData<List<CountryDto>>
 
     suspend fun insertCountries(countries: List<CountryDto>)
+
+    suspend fun getCountryByName(name: String): CountryDto
 }

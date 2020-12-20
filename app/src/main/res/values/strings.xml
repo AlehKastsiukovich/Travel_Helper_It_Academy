@@ -16,4 +16,5 @@
     <string name="capital">Capital:</string>
     <string name="language">Language:</string>
     <string name="location">Location:</string>
+    <string name="country_key">country_key:</string>
 </resources>

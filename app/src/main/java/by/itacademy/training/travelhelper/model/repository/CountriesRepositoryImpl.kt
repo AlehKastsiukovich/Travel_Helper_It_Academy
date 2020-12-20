@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import by.itacademy.training.travelhelper.model.db.CountriesDao
 import by.itacademy.training.travelhelper.model.dto.CountryDto
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CountriesRepositoryImpl @Inject constructor(
@@ -26,6 +28,10 @@ class CountriesRepositoryImpl @Inject constructor(
 
     override suspend fun insertCountries(countries: List<CountryDto>) {
         countriesDao.insertCountries(countries)
+    }
+
+    override suspend fun getCountryByName(name: String) = withContext(Dispatchers.IO) {
+        countriesDao.getCountryByName(name)
     }
 
     companion object {
