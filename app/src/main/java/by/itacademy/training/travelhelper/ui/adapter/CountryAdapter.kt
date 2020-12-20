@@ -1,16 +1,17 @@
 package by.itacademy.training.travelhelper.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemCountryBinding
+import by.itacademy.training.travelhelper.di.component.MainActivityScope
 import by.itacademy.training.travelhelper.model.dto.CountryDto
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 
+@MainActivityScope
 class CountryAdapter @Inject constructor(
     private val onItemClickListener: OnCountryItemClickListener
 ) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {

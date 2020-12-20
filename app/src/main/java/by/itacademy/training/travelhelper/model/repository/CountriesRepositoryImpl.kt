@@ -5,7 +5,9 @@ import by.itacademy.training.travelhelper.model.dto.CountryDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CountriesRepositoryImpl @Inject constructor(
     private val countriesDao: CountriesDao,
     private val countryMapper: CountryMapper

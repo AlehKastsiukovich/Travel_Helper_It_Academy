@@ -6,6 +6,7 @@ import dagger.BindsInstance
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainActivityModule::class])
+@MainActivityScope
 interface MainActivityComponent {
 
     @Subcomponent.Builder

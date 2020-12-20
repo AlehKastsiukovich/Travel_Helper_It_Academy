@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
 import by.itacademy.training.travelhelper.model.domain.Country
-import by.itacademy.training.travelhelper.model.dto.CountryDto
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import com.bumptech.glide.Glide
 import javax.inject.Inject
