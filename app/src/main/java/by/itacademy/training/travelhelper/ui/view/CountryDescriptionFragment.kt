@@ -10,7 +10,9 @@ import androidx.lifecycle.Observer
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
 import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
+import by.itacademy.training.travelhelper.util.Status
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class CountryDescriptionFragment : Fragment() {
@@ -37,23 +39,55 @@ class CountryDescriptionFragment : Fragment() {
         model.currentCountry.observe(
             viewLifecycleOwner,
             Observer {
-                setDescriptionImage(it)
-                setDescriptionText(it)
+                when(it.status) {
+                    Status.LOADING -> viewProgressBar()
+                    Status.ERROR -> it.message?.let {message ->  viewError(message) }
+                    Status.SUCCESS -> it.data?.let {country -> viewCountryDescription(country)}
+                }
             }
         )
     }
 
-    private fun setDescriptionText(country: Country?) = with(binding) {
-        countryText.text = country?.name
-        regionText.text = country?.region
-        capitalTextView.text = country?.capital
-        countryLanguageTextView.text = country?.language
-        countryDescriptionText.text = country?.description
+    private fun viewCountryDescription(country: Country) {
+        setDescriptionImage(country)
+        setDescriptionText(country)
+        with(binding) {
+            progressBar.visibility = View.INVISIBLE
+            mainLayout.visibility = View.VISIBLE
+        }
     }
 
-    private fun setDescriptionImage(country: Country?) {
+    private fun viewProgressBar() {
+        with(binding) {
+            mainLayout.visibility = View.INVISIBLE
+            progressBar.visibility = View.VISIBLE
+        }
+    }
+
+    private fun viewError(message: String) {
+        binding.progressBar.visibility = View.VISIBLE
+        showErrorMessage(message)
+    }
+
+    private fun showErrorMessage(message: String) {
+        Snackbar.make(
+            binding.root,
+            message,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
+    private fun setDescriptionText(country: Country) = with(binding) {
+        countryText.text = country.name
+        regionText.text = country.region
+        capitalTextView.text = country.capital
+        countryLanguageTextView.text = country.language
+        countryDescriptionText.text = country.description
+    }
+
+    private fun setDescriptionImage(country: Country) {
         Glide.with(this)
-            .load(country?.descriptionImageUrl)
+            .load(country.descriptionImageUrl)
             .centerCrop()
             .into(binding.countryDescriptionImage)
     }

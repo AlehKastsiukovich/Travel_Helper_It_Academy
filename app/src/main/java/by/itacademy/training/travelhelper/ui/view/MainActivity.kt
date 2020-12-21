@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity(), OnCountryItemClickListener {
 
     private fun viewCountryList(countries: List<Country>) {
         setSuccessDataToAdapter(countries)
-        binding.mainLayout.visibility = View.VISIBLE
         binding.progressBar.visibility = View.INVISIBLE
+        binding.mainLayout.visibility = View.VISIBLE
     }
 
     private fun viewProgressBar() {
