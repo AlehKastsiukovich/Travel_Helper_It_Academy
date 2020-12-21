@@ -27,5 +27,4 @@ interface ApplicationComponent {
 
     fun mainActivitySubComponentBuilder(): MainActivityComponent.Builder
     fun countryActivitySubComponentBuilder(): CountryActivityComponent.Builder
-    fun videoListSubComponentBuilder(): VideoListComponent.Builder
 }

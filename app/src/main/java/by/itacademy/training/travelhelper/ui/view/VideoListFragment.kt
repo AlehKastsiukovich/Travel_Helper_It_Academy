@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.databinding.FragmentVideoListBinding
 import by.itacademy.training.travelhelper.model.dto.ItemDto
 import by.itacademy.training.travelhelper.ui.adapter.VideoListAdapter
 import by.itacademy.training.travelhelper.ui.adapter.YoutubePlayerListener
-import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import by.itacademy.training.travelhelper.ui.viewmodel.VideoListViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class VideoListFragment : Fragment(), YoutubePlayerListener {
 
     @Inject lateinit var videoListAdapter: VideoListAdapter
+    @Inject lateinit var countryDescriptionViewModel: CountryDescriptionViewModel
     @Inject lateinit var model: VideoListViewModel
 
     private lateinit var binding: FragmentVideoListBinding
@@ -38,11 +40,12 @@ class VideoListFragment : Fragment(), YoutubePlayerListener {
         inject()
         setUpAdapter()
         observeVideoList()
+        getVideoListByCountryName()
     }
 
     private fun inject() {
-        (activity?.application as App)
-            .appComponent
+        (activity as CountryActivity)
+            .component
             .videoListSubComponentBuilder()
             .with(this)
             .build()
@@ -52,8 +55,17 @@ class VideoListFragment : Fragment(), YoutubePlayerListener {
     private fun observeVideoList() {
         model.videoList.observe(
             viewLifecycleOwner,
-            {
-                videoListAdapter.setVideoList(it.items)
+            { videoList ->
+                videoList?.let { videoListAdapter.setVideoList(it.items) }
+            }
+        )
+    }
+
+    private fun getVideoListByCountryName() {
+        countryDescriptionViewModel.currentCountry.observe(
+            viewLifecycleOwner,
+            Observer {
+                it.data?.name?.let { name -> model.fetchVideosByCountry(name) }
             }
         )
     }
@@ -68,7 +80,6 @@ class VideoListFragment : Fragment(), YoutubePlayerListener {
     }
 
     private fun setUpAdapter() {
-        videoListAdapter = VideoListAdapter(this)
         binding.recyclerView.apply {
             adapter = videoListAdapter
             layoutManager = LinearLayoutManager(activity)

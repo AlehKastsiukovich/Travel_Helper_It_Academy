@@ -50,9 +50,9 @@ class CountryActivity : AppCompatActivity() {
 
     private fun initFragments() {
         countryDescriptionFragment = CountryDescriptionFragment()
-        videoListFragment = VideoListFragment()
         routeListFragment = RouteListFragment()
         mapsFragment = MapsFragment()
+        videoListFragment = VideoListFragment()
         currentFragment = countryDescriptionFragment
     }
 

@@ -17,6 +17,7 @@ interface CountryActivityComponent {
         fun build(): CountryActivityComponent
     }
 
+    fun videoListSubComponentBuilder(): VideoListComponent.Builder
     fun inject(countryActivity: CountryActivity)
     fun inject(countryDescriptionFragment: CountryDescriptionFragment)
 }

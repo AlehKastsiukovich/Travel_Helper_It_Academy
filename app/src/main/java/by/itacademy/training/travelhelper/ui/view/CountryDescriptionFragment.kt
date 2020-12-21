@@ -39,10 +39,10 @@ class CountryDescriptionFragment : Fragment() {
         model.currentCountry.observe(
             viewLifecycleOwner,
             Observer {
-                when(it.status) {
+                when (it.status) {
                     Status.LOADING -> viewProgressBar()
-                    Status.ERROR -> it.message?.let {message ->  viewError(message) }
-                    Status.SUCCESS -> it.data?.let {country -> viewCountryDescription(country)}
+                    Status.ERROR -> it.message?.let { message -> viewError(message) }
+                    Status.SUCCESS -> it.data?.let { country -> viewCountryDescription(country) }
                 }
             }
         )
