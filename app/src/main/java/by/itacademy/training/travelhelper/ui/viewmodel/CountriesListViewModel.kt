@@ -8,15 +8,16 @@ import androidx.lifecycle.liveData
 import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
 import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.util.Event
 import javax.inject.Inject
 
 class CountriesListViewModel(application: Application) : AndroidViewModel(application) {
 
     @Inject lateinit var repository: CountriesRepository
 
-    val countries: LiveData<List<Country>>
+    val countries: LiveData<Event<List<Country>>>
         get() = _countries
-    private var _countries: LiveData<List<Country>> = MutableLiveData<List<Country>>()
+    private var _countries: LiveData<Event<List<Country>>> = MutableLiveData<Event<List<Country>>>()
 
     init {
         (application as App).appComponent.inject(this)
@@ -25,8 +26,13 @@ class CountriesListViewModel(application: Application) : AndroidViewModel(applic
 
     private fun fetchCountriesFromDb() {
         _countries = liveData {
-            val result = repository.getAllCountriesFromDb()
-            emit(result)
+            emit(Event.loading(null))
+            try {
+                val result = repository.getAllCountriesFromDb()
+                emit(Event.success(result))
+            } catch (e: Exception) {
+                emit(Event.error(null, e.message))
+            }
         }
     }
 }

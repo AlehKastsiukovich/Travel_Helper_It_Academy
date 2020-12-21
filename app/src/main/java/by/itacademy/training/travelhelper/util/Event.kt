@@ -7,10 +7,8 @@ class Event <out T>(
 ) {
     companion object {
 
-        fun <T> success(data: T): Event<T> = Event(Status.SUCCESS, data, null)
-
+        fun <T> success(data: T?): Event<T> = Event(Status.SUCCESS, data, null)
         fun <T> loading(data: T?): Event<T> = Event(Status.LOADING, null, null)
-
         fun <T> error(data: T?, message: String?): Event<T> = Event(Status.ERROR, null, message)
     }
 }
