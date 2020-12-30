@@ -17,4 +17,6 @@
     <string name="language">Language:</string>
     <string name="location">Location:</string>
     <string name="country_key">country_key:</string>
+    <string name="by_car">By car</string>
+    <string name="hiking">Hiking</string>
 </resources>

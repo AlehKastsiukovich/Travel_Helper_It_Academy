@@ -1,30 +1,36 @@
 package by.itacademy.training.travelhelper.ui.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentMapsBinding
+import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.maps.android.PolyUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 
-class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
+class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentMapsBinding
-
-//    private val callback = OnMapReadyCallback { googleMap ->
-//        val Minsk = LatLng(53.89, 27.56)
-//        googleMap.addMarker(MarkerOptions().position(Minsk).title("Marker in Minsk"))
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(Minsk))
-//    }
+    private lateinit var map: GoogleMap
+    private lateinit var fkip: LatLng
+    private lateinit var monas: LatLng
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,28 +45,62 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolylineClickLi
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
+        fkip = LatLng(-6.3037978, 106.8693713)
+        monas = LatLng(-6.1890511, 106.8251573)
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
-        val polyline = googleMap?.run {
-            addPolyline(
-                PolylineOptions()
-                    .clickable(true)
-                    .add(
-                        LatLng(-35.016, 143.321),
-                        LatLng(-34.747, 145.592),
-                        LatLng(-34.364, 147.891),
-                        LatLng(-33.501, 150.217),
-                        LatLng(-32.306, 149.248),
-                        LatLng(-32.491, 147.309)
-                    )
-            )
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+
+        val markerFkip = MarkerOptions()
+            .position(fkip)
+            .title("FKIP")
+        val markerMonas = MarkerOptions()
+            .position(monas)
+            .title("Monas")
+
+        map.addMarker(markerFkip)
+        map.addMarker(markerMonas)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(monas, 11.6f))
+
+        val fromFKIP = fkip.latitude.toString() + "," + fkip.longitude.toString()
+        val toMonas = monas.latitude.toString() + "," + monas.longitude.toString()
+
+        lifecycleScope.launch() {
+            val result = getResponse()
+            drawPolyline(result)
         }
-
-        googleMap?.setOnPolylineClickListener(this)
     }
 
-    override fun onPolylineClick(p0: Polyline?) {
-        TODO("Not yet implemented")
+    private suspend fun getResponse() = withContext(Dispatchers.IO) {
+        val apiServices = RetrofitClient.apiServices()
+        apiServices.getDirection()
+    }
+
+    private fun drawPolyline(response: DirectionResponses) {
+        val shape = response.routes?.get(0)?.overviewPolyline?.points
+
+        val polyline = PolylineOptions()
+            .addAll(PolyUtil.decode(shape))
+            .width(8f)
+            .color(Color.RED)
+        map.addPolyline(polyline)
+    }
+
+    private interface ApiServices {
+        @GET("/maps/api/directions/json?origin=-6.3037978, 106.8693713&destination=-6.1890511, 106.8251573&key=AIzaSyB9x61iotYLzMuPA810UlnJefQ_-wh8oF8")
+        suspend fun getDirection(): DirectionResponses
+    }
+
+    private object RetrofitClient {
+        fun apiServices(): ApiServices {
+            val retrofit = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://maps.googleapis.com")
+                .build()
+
+            return retrofit.create(ApiServices::class.java)
+        }
     }
 }

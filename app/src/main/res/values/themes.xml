@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.TravelHelper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/design_default_color_primary</item>
         <item name="colorPrimaryVariant">@color/design_default_color_primary_variant</item>
@@ -19,5 +21,12 @@
         <item name="android:layout_height">?attr/actionBarSize</item>
          <item name="theme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
         <item name="android:background">#101849</item>
+    </style>
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 </resources>
