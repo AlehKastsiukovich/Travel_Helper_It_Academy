@@ -59,8 +59,8 @@ class CountryActivity : AppCompatActivity() {
     private fun addFragmentsToTransaction() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentsContainer, countryDescriptionFragment)
-            add(R.id.fragmentsContainer, routeListFragment).hide(routeListFragment)
-            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment)
+            add(R.id.fragmentsContainer, routeListFragment).hide(routeListFragment).addToBackStack(null)
+            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment).addToBackStack(null)
             commit()
         }
     }

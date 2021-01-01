@@ -19,7 +19,9 @@ class RoomModule {
             context,
             CountriesRoomDatabase::class.java,
             ROOM_DATABASE_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

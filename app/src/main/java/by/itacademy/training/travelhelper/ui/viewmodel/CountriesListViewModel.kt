@@ -1,6 +1,7 @@
 package by.itacademy.training.travelhelper.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,6 +32,7 @@ class CountriesListViewModel(application: Application) : AndroidViewModel(applic
                 val result = repository.getAllCountriesFromDb()
                 emit(Event.success(result))
             } catch (e: Exception) {
+                Log.d("TAGG", e.message.toString())
                 emit(Event.error(null, e.message))
             }
         }
