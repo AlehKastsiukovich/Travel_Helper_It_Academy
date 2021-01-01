@@ -1,7 +1,9 @@
 package by.itacademy.training.travelhelper.model.repository
 
 import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.model.domain.Route
 import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.dto.RouteDto
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +18,8 @@ class CountryMapperImpl @Inject constructor() : CountryMapper {
             imageUrl ?: EMPTY_STRING,
             descriptionImageUrl ?: EMPTY_STRING,
             capital ?: EMPTY_STRING,
-            language ?: EMPTY_STRING
+            language ?: EMPTY_STRING,
+            mapRouteList(routs)
         )
     }
 
@@ -26,6 +29,21 @@ class CountryMapperImpl @Inject constructor() : CountryMapper {
             countries.add(mapSingleCountry(it))
         }
         return countries
+    }
+
+    override fun mapRouteList(list: List<RouteDto>?): List<Route> {
+        val routeList = mutableListOf<Route>()
+        list?.forEach { routs ->
+            routeList.add(
+                Route(
+                    routs.title ?: EMPTY_STRING,
+                    routs.description ?: EMPTY_STRING,
+                    routs.request ?: EMPTY_STRING,
+                    routs.imageUrl ?: EMPTY_STRING
+                )
+            )
+        }
+        return routeList
     }
 
     companion object {
