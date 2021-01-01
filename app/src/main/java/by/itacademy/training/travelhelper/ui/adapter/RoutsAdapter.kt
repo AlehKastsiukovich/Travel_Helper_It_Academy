@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RoutViewHolder>() {
 
+//    private val routs = mutableListOf<Rout>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutViewHolder {
         TODO("Not yet implemented")
     }

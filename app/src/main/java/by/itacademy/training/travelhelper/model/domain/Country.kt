@@ -7,5 +7,6 @@ data class Country(
     val imageUrl: String,
     val descriptionImageUrl: String,
     val capital: String,
-    val language: String
+    val language: String,
+    val routs: List<Route>
 )
