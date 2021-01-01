@@ -6,12 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RoutViewHolder>() {
 
-    class RoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        fun bind() {
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutViewHolder {
         TODO("Not yet implemented")
     }
@@ -22,5 +16,11 @@ class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RoutViewHolder>() {
 
     override fun getItemCount(): Int {
         TODO("Not yet implemented")
+    }
+
+    class RoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        fun bind() {
+        }
     }
 }

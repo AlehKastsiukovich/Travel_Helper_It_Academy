@@ -1,7 +1,6 @@
 package by.itacademy.training.travelhelper.ui.app
 
 import android.app.Application
-import android.util.Log
 import by.itacademy.training.travelhelper.di.component.ApplicationComponent
 import by.itacademy.training.travelhelper.di.component.DaggerApplicationComponent
 import by.itacademy.training.travelhelper.di.module.ApplicationContextModule
@@ -12,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class App : Application() {
@@ -54,8 +54,12 @@ class App : Application() {
                     val routs = document.get("routes") as List<Map<String, String>>
                     countries.add(countryDtoBuilder.buildCountryDto(routs, country))
                 }
-                Log.d("TAGG", "final country: $countries")
+                sendFireStoreDataToDatabase(countries)
             }
+    }
+
+    private fun sendFireStoreDataToDatabase(countries: List<CountryDto>) {
+        applicationScope.launch { repository.insertCountries(countries) }
     }
 
     private fun inject() {
