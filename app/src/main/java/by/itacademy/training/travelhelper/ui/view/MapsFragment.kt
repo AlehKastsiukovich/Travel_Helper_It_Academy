@@ -2,6 +2,7 @@ package by.itacademy.training.travelhelper.ui.view
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -62,7 +64,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         map.addMarker(markerFkip)
         map.addMarker(markerMonas)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(monas, 11.6f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(monas, 12f))
 
         val fromFKIP = fkip.latitude.toString() + "," + fkip.longitude.toString()
         val toMonas = monas.latitude.toString() + "," + monas.longitude.toString()
@@ -75,7 +77,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private suspend fun getResponse() = withContext(Dispatchers.IO) {
         val apiServices = RetrofitClient.apiServices()
-        apiServices.getDirection()
+        apiServices.getDirection(url)
     }
 
     private fun drawPolyline(response: DirectionResponses) {
@@ -89,8 +91,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private interface ApiServices {
-        @GET("/maps/api/directions/json?origin=-6.3037978, 106.8693713&destination=-6.1890511, 106.8251573&key=AIzaSyB9x61iotYLzMuPA810UlnJefQ_-wh8oF8")
-        suspend fun getDirection(): DirectionResponses
+        @GET
+        suspend fun getDirection(@Url str: String): DirectionResponses
     }
 
     private object RetrofitClient {
@@ -102,5 +104,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
             return retrofit.create(ApiServices::class.java)
         }
+    }
+
+    companion object {
+        const val path = "json?origin=-6.3037978, 106.8693713&destination=-6.1890511, 106.8251573&key=AIzaSyB9x61iotYLzMuPA810UlnJefQ_-wh8oF8"
+        const val url = "/maps/api/directions/json?origin=-6.3037978, 106.8693713&destination=-6.1890511, 106.8251573&key=AIzaSyB9x61iotYLzMuPA810UlnJefQ_-wh8oF8"
     }
 }
