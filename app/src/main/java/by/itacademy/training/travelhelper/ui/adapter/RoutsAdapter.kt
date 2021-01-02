@@ -9,7 +9,9 @@ import by.itacademy.training.travelhelper.databinding.RouteItemBinding
 import by.itacademy.training.travelhelper.model.domain.Route
 import coil.load
 
-class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RouteViewHolder>() {
+class RoutsAdapter(
+    private val onRouteClickListener: OnRouteClickListener
+) : RecyclerView.Adapter<RoutsAdapter.RouteViewHolder>() {
 
     private val routeList = mutableListOf<Route>()
 
@@ -17,7 +19,7 @@ class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RouteViewHolder>() {
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.route_item, parent, false)
-        return RouteViewHolder(view)
+        return RouteViewHolder(view, onRouteClickListener)
     }
 
     override fun onBindViewHolder(holder: RouteViewHolder, position: Int) {
@@ -34,10 +36,14 @@ class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RouteViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class RouteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class RouteViewHolder(
+        private val view: View,
+        private val onRouteClickListener: OnRouteClickListener
+    ) : RecyclerView.ViewHolder(view) {
         private val binding: RouteItemBinding = RouteItemBinding.bind(view)
 
         fun bind(route: Route) {
+            view.setOnClickListener { onRouteClickListener.onRouteClick(route) }
             with(binding) {
                 routeImage.load("https://upload.wikimedia.org/wikipedia/commons/f/ff/Route_66_at_Roy%27s.jpg") {
                     error(R.drawable.ic_baseline_image_24_placeholder)
