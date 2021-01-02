@@ -3,26 +3,33 @@ package by.itacademy.training.travelhelper.ui.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import by.itacademy.training.travelhelper.model.domain.Route
 
 class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RoutViewHolder>() {
 
-//    private val routs = mutableListOf<Rout>()
+    private val routeList = mutableListOf<Route>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutViewHolder {
-        TODO("Not yet implemented")
+        return null
     }
 
     override fun onBindViewHolder(holder: RoutViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(routeList[position])
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+    override fun getItemCount() = routeList.size
+
+    fun addRouts(routs: List<Route>) {
+        with(routeList) {
+            clear()
+            addAll(routs)
+        }
+        notifyDataSetChanged()
     }
 
     class RoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind() {
+        fun bind(route: Route) {
         }
     }
 }
