@@ -1,27 +1,47 @@
 package by.itacademy.training.travelhelper.util
 
 import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.dto.MarkerDto
 import by.itacademy.training.travelhelper.model.dto.RouteDto
 
 class CountryDtoBuilder {
 
-    private fun buildRouteList(routs: List<Map<String, String>>): List<RouteDto> {
+    fun buildCountryDto(routeMap: List<Map<String, Any>>, country: CountryDto): CountryDto =
+        country.apply {
+            routs = buildRouteList(routeMap)
+        }
+
+    private fun buildRouteList(routs: List<Map<String, Any>>): List<RouteDto> {
         val routeList = mutableListOf<RouteDto>()
         routs.forEach {
+            val markerMap = it["markers"] as List<Map<String, String>>
+            val markerList = buildMarkerList(markerMap)
             routeList.add(
                 RouteDto(
-                    it["title"],
-                    it["description"],
-                    it["request"],
-                    it["imageUrl"]
+                    it["title"] as String?,
+                    it["description"] as String?,
+                    it["request"] as String?,
+                    it["imageUrl"] as String?,
+                    markerList
                 )
             )
         }
         return routeList
     }
 
-    fun buildCountryDto(routeMap: List<Map<String, String>>, country: CountryDto): CountryDto =
-        country.apply {
-            routs = buildRouteList(routeMap)
+    private fun buildMarkerList(markerMap: List<Map<String, String>>): List<MarkerDto> {
+        val markerList = mutableListOf<MarkerDto>()
+        markerMap.forEach {
+            markerList.add(
+                MarkerDto(
+                    it["title"],
+                    it["description"],
+                    it["imageUrl"],
+                    it["longitude"]?.toDouble(),
+                    it["latitude"]?.toDouble()
+                )
+            )
         }
+        return markerList
+    }
 }

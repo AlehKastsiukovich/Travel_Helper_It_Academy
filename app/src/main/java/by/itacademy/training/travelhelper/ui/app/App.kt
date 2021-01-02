@@ -51,7 +51,7 @@ class App : Application() {
                 val countries = mutableListOf<CountryDto>()
                 task.forEach { document ->
                     val country = document.toObject(CountryDto::class.java)
-                    val routs = document.get("routes") as List<Map<String, String>>
+                    val routs = document.get("routes") as List<Map<String, Any>>
                     countries.add(countryDtoBuilder.buildCountryDto(routs, country))
                 }
                 sendFireStoreDataToDatabase(countries)
