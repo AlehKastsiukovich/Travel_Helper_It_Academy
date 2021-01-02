@@ -2,11 +2,11 @@ package by.itacademy.training.travelhelper.ui.view
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentMapsBinding
@@ -47,6 +47,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
+        (activity as CountryActivity).model.currentCountry.observe(
+            viewLifecycleOwner,
+            Observer {
+                val routs = it.data?.routs
+            }
+        )
 
         fkip = LatLng(-6.3037978, 106.8693713)
         monas = LatLng(-6.1890511, 106.8251573)
