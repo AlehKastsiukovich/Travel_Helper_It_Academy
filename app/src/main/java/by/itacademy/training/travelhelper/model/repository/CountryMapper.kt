@@ -1,8 +1,10 @@
 package by.itacademy.training.travelhelper.model.repository
 
 import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.model.domain.Marker
 import by.itacademy.training.travelhelper.model.domain.Route
 import by.itacademy.training.travelhelper.model.dto.CountryDto
+import by.itacademy.training.travelhelper.model.dto.MarkerDto
 import by.itacademy.training.travelhelper.model.dto.RouteDto
 
 interface CountryMapper {
@@ -12,4 +14,6 @@ interface CountryMapper {
     fun mapCountryList(list: List<CountryDto>): List<Country>
 
     fun mapRouteList(list: List<RouteDto>?): List<Route>
+
+    fun mapMarkerList(list: List<MarkerDto>?): List<Marker>
 }
