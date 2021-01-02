@@ -97,19 +97,19 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         map.addPolyline(polyline)
     }
 
-    private interface ApiServices {
+    private interface MapApiService {
         @GET
         suspend fun getDirection(@Url str: String): DirectionResponses
     }
 
     private object RetrofitClient {
-        fun apiServices(): ApiServices {
+        fun apiServices(): MapApiService {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("https://maps.googleapis.com")
                 .build()
 
-            return retrofit.create(ApiServices::class.java)
+            return retrofit.create(MapApiService::class.java)
         }
     }
 
