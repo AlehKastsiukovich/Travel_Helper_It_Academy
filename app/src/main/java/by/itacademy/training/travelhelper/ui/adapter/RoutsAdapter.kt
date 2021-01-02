@@ -1,19 +1,26 @@
 package by.itacademy.training.travelhelper.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import by.itacademy.training.travelhelper.R
+import by.itacademy.training.travelhelper.databinding.RouteItemBinding
 import by.itacademy.training.travelhelper.model.domain.Route
+import coil.load
 
-class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RoutViewHolder>() {
+class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RouteViewHolder>() {
 
     private val routeList = mutableListOf<Route>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutViewHolder {
-        return null
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RouteViewHolder {
+        val view = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.route_item, parent, false)
+        return RouteViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RoutViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RouteViewHolder, position: Int) {
         holder.bind(routeList[position])
     }
 
@@ -27,9 +34,17 @@ class RoutsAdapter : RecyclerView.Adapter<RoutsAdapter.RoutViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class RoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class RouteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding: RouteItemBinding = RouteItemBinding.bind(view)
 
         fun bind(route: Route) {
+            with(binding) {
+                routeImage.load("https://upload.wikimedia.org/wikipedia/commons/f/ff/Route_66_at_Roy%27s.jpg") {
+                    error(R.drawable.ic_baseline_image_24_placeholder)
+                }
+                routeTitleText.text = route.title
+                routeDescriptionText.text = route.description
+            }
         }
     }
 }
