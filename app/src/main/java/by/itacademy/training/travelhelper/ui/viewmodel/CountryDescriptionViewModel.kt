@@ -9,7 +9,7 @@ import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.model.domain.Route
 import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponse
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
-import by.itacademy.training.travelhelper.model.repository.DirectionsRepositoryImpl
+import by.itacademy.training.travelhelper.model.repository.DirectionsRepository
 import by.itacademy.training.travelhelper.ui.app.App
 import by.itacademy.training.travelhelper.util.Event
 import javax.inject.Inject
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class CountryDescriptionViewModel(application: Application) : AndroidViewModel(application) {
 
     @Inject lateinit var repository: CountriesRepository
-    private val directionsRepository = DirectionsRepositoryImpl()
+    @Inject lateinit var directionRepository: DirectionsRepository
 
     var currentCountry: LiveData<Event<Country>> = MutableLiveData()
     var direction: LiveData<Event<DirectionResponse>> = MutableLiveData()
@@ -43,7 +43,7 @@ class CountryDescriptionViewModel(application: Application) : AndroidViewModel(a
     private fun setCurrentDirection(url: String) {
         direction = liveData {
             try {
-                val result = directionsRepository.getDirection(url)
+                val result = directionRepository.getDirection(url)
                 emit(Event.success(result))
             } catch (e: Exception) {
                 emit(Event.error(null, e.message))
