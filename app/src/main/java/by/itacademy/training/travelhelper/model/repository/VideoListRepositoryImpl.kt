@@ -9,5 +9,5 @@ class VideoListRepositoryImpl @Inject constructor(
     private val api: YoutubeApi
 ) : VideoListRepository {
 
-    override suspend fun getVideos(countryName: String) = api.getVideos(countryName)
+    override suspend fun getVideos(countryName: String, key: String) = api.getVideos(countryName, key)
 }

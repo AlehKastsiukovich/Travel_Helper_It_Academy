@@ -4,5 +4,5 @@ import by.itacademy.training.travelhelper.model.dto.VideoListDto
 
 interface VideoListRepository {
 
-    suspend fun getVideos(countryName: String): VideoListDto
+    suspend fun getVideos(countryName: String, key: String): VideoListDto
 }
