@@ -44,21 +44,23 @@ class App : Application() {
     }
 
     private fun fetchFireStoreData() {
-        val reference = firestore.collection(FIRESTORE_COUNTRY_STORAGE)
-            .get()
-            .addOnSuccessListener { task ->
-                val countries = mutableListOf<CountryDto>()
-                task.forEach { document ->
-                    val country = document.toObject(CountryDto::class.java)
-                    val routs = document.get("routes") as List<Map<String, Any>>
-                    countries.add(countryDtoBuilder.buildCountryDto(routs, country))
+        applicationScope.launch {
+            val countries = mutableListOf<CountryDto>()
+            firestore.collection(FIRESTORE_COUNTRY_STORAGE)
+                .get()
+                .addOnSuccessListener { task ->
+                    task.forEach { document ->
+                        val country = document.toObject(CountryDto::class.java)
+                        val routs = document.get("routes") as List<Map<String, Any>>
+                        countries.add(countryDtoBuilder.buildCountryDto(routs, country))
+                    }
                 }
-                sendFireStoreDataToDatabase(countries)
-            }
+            sendFireStoreDataToDatabase(countries)
+        }
     }
 
-    private fun sendFireStoreDataToDatabase(countries: List<CountryDto>) {
-        applicationScope.launch { repository.insertCountries(countries) }
+    private suspend fun sendFireStoreDataToDatabase(countries: List<CountryDto>) {
+        repository.insertCountries(countries)
     }
 
     private fun inject() {
