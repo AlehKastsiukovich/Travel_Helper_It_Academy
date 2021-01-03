@@ -3,8 +3,11 @@ package by.itacademy.training.travelhelper.util
 import by.itacademy.training.travelhelper.model.dto.CountryDto
 import by.itacademy.training.travelhelper.model.dto.MarkerDto
 import by.itacademy.training.travelhelper.model.dto.RouteDto
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CountryDtoBuilder {
+@Singleton
+class CountryDtoBuilder @Inject constructor() {
 
     fun buildCountryDto(routeMap: List<Map<String, Any>>, country: CountryDto): CountryDto =
         country.apply {

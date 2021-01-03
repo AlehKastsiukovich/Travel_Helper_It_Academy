@@ -18,11 +18,10 @@ class App : Application() {
 
     @Inject lateinit var repository: CountriesRepository
     @Inject lateinit var firestore: FirebaseFirestore
+    @Inject lateinit var countryDtoBuilder: CountryDtoBuilder
 
     lateinit var appComponent: ApplicationComponent
     lateinit var applicationScope: CoroutineScope
-
-    private val countryDtoBuilder = CountryDtoBuilder()
 
     override fun onCreate() {
         super.onCreate()
