@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ItemCountryBinding
 import by.itacademy.training.travelhelper.di.component.MainActivityScope
-import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.domain.Country
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import by.itacademy.training.travelhelper.model.dto.VideoListDto
 import by.itacademy.training.travelhelper.model.repository.VideoListRepository
-import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.app.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

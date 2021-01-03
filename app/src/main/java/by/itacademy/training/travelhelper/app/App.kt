@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.ui.app
+package by.itacademy.training.travelhelper.app
 
 import android.app.Application
 import by.itacademy.training.travelhelper.di.component.ApplicationComponent
@@ -51,7 +51,8 @@ class App : Application() {
                 .addOnSuccessListener { task ->
                     task.forEach { document ->
                         val country = document.toObject(CountryDto::class.java)
-                        val routs = document.get("routes") as List<Map<String, Any>>
+                        val routs =
+                            document.get(FIRESTORE_DOCUMENT_ROUTES) as List<Map<String, Any>>
                         countries.add(countryDtoBuilder.buildCountryDto(routs, country))
                     }
                 }
@@ -69,5 +70,6 @@ class App : Application() {
 
     companion object {
         private const val FIRESTORE_COUNTRY_STORAGE = "countries_firestore"
+        private const val FIRESTORE_DOCUMENT_ROUTES = "routes"
     }
 }

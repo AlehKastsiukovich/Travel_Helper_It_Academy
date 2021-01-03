@@ -8,10 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ActivityMainBinding
-import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.domain.Country
 import by.itacademy.training.travelhelper.ui.adapter.CountryAdapter
 import by.itacademy.training.travelhelper.ui.adapter.OnCountryItemClickListener
-import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.app.App
 import by.itacademy.training.travelhelper.ui.viewmodel.CountriesListViewModel
 import by.itacademy.training.travelhelper.util.Status
 import com.google.android.material.snackbar.Snackbar

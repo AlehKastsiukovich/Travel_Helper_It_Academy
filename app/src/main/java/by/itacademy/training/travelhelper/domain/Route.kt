@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.model.domain
+package by.itacademy.training.travelhelper.domain
 
 data class Route(
     var title: String,

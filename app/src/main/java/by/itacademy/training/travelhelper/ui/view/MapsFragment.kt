@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import by.itacademy.training.travelhelper.R
-import by.itacademy.training.travelhelper.model.domain.Route
+import by.itacademy.training.travelhelper.domain.Route
 import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponse
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import by.itacademy.training.travelhelper.util.Status

@@ -1,6 +1,6 @@
 package by.itacademy.training.travelhelper.ui.adapter
 
-import by.itacademy.training.travelhelper.model.domain.Route
+import by.itacademy.training.travelhelper.domain.Route
 
 interface OnRouteClickListener {
 

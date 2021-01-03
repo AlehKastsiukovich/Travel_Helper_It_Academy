@@ -1,4 +1,4 @@
-package by.itacademy.training.travelhelper.model.domain
+package by.itacademy.training.travelhelper.domain
 
 data class Country(
     val name: String,

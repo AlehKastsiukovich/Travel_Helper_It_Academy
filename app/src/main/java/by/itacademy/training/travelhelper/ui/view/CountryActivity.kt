@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.ActivityCountryBinding
 import by.itacademy.training.travelhelper.di.component.CountryActivityComponent
-import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.app.App
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import javax.inject.Inject
 

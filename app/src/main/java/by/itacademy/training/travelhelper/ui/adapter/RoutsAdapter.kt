@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.RouteItemBinding
 import by.itacademy.training.travelhelper.di.component.RouteListFragmentScope
-import by.itacademy.training.travelhelper.model.domain.Route
+import by.itacademy.training.travelhelper.domain.Route
 import coil.load
 import javax.inject.Inject
 

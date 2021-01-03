@@ -4,10 +4,13 @@ import androidx.room.TypeConverter
 import by.itacademy.training.travelhelper.model.dto.RouteDto
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RouteListConverter {
+@Singleton
+class RouteListConverter @Inject constructor() {
 
-    private val gson = Gson()
+    val gson = Gson()
 
     @TypeConverter
     fun fromListToString(routes: List<RouteDto>): String = gson.toJson(routes)

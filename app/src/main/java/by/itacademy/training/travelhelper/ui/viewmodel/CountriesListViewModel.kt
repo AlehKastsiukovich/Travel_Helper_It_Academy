@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.domain.Country
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
-import by.itacademy.training.travelhelper.ui.app.App
+import by.itacademy.training.travelhelper.app.App
 import by.itacademy.training.travelhelper.util.Event
 import javax.inject.Inject
 

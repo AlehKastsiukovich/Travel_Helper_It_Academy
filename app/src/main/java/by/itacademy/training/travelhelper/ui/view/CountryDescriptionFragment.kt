@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import by.itacademy.training.travelhelper.databinding.FragmentCountryDescriptionBinding
-import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.domain.Country
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import by.itacademy.training.travelhelper.util.Status
 import com.bumptech.glide.Glide

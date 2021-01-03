@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentRoutListBinding
-import by.itacademy.training.travelhelper.model.domain.Route
+import by.itacademy.training.travelhelper.domain.Route
 import by.itacademy.training.travelhelper.ui.adapter.OnRouteClickListener
 import by.itacademy.training.travelhelper.ui.adapter.RoutsAdapter
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel

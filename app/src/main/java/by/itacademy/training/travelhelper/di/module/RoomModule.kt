@@ -25,6 +25,7 @@ class RoomModule {
     }
 
     @Provides
+    @Singleton
     fun provideCountriesDao(database: CountriesRoomDatabase): CountriesDao = database.countriesDao()
 
     companion object {
