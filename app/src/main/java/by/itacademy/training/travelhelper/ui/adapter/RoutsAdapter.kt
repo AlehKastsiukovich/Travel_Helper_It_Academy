@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.RouteItemBinding
+import by.itacademy.training.travelhelper.di.component.RouteListFragmentScope
 import by.itacademy.training.travelhelper.model.domain.Route
 import coil.load
+import javax.inject.Inject
 
-class RoutsAdapter(
+@RouteListFragmentScope
+class RoutsAdapter @Inject constructor(
     private val onRouteClickListener: OnRouteClickListener
 ) : RecyclerView.Adapter<RoutsAdapter.RouteViewHolder>() {
 

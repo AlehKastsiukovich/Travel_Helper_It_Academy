@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentRoutListBinding
@@ -19,10 +18,9 @@ import javax.inject.Inject
 class RouteListFragment : Fragment(), OnRouteClickListener {
 
     @Inject lateinit var model: CountryDescriptionViewModel
+    @Inject lateinit var routsAdapter: RoutsAdapter
 
     private lateinit var binding: FragmentRoutListBinding
-
-    private val routsAdapter = RoutsAdapter(this)
     private val mapsFragment = MapsFragment()
 
     override fun onCreateView(
@@ -63,7 +61,7 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
         val country = (activity as CountryActivity).model.currentCountry
         country.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 it.data?.let { country ->
                     routsAdapter.addRouts(country.routs)
                 }
@@ -73,6 +71,11 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context as CountryActivity).component.inject(this)
+        (context as CountryActivity)
+            .component
+            .routeListSubComponentBuilder()
+            .with(this)
+            .build()
+            .inject(this)
     }
 }

@@ -13,3 +13,7 @@ annotation class CountryActivityScope
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class VideoListFragmentScope
+
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class RouteListFragmentScope
