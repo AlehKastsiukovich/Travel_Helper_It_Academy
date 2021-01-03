@@ -1,7 +1,7 @@
 package by.itacademy.training.travelhelper.model.repository
 
 import by.itacademy.training.travelhelper.model.api.MapApiService
-import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
+import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DirectionsRepositoryImpl : DirectionsRepository {
 
-    override suspend fun getDirection(url: String): DirectionResponses = withContext(Dispatchers.IO) {
+    override suspend fun getDirection(url: String): DirectionResponse = withContext(Dispatchers.IO) {
         RetrofitClient.apiServices().getDirection(url)
     }
 

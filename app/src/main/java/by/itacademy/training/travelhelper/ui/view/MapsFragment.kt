@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.model.domain.Route
-import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
+import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponse
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
+import by.itacademy.training.travelhelper.util.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.PolyUtil
 import javax.inject.Inject
 
@@ -51,7 +53,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         addMarkersToMap()
         model.direction.observe(
-            viewLifecycleOwner, { directionResponses -> drawPolyline(directionResponses) }
+            viewLifecycleOwner, { event ->
+                when(event.status) {
+                    Status.SUCCESS -> event.data?.let { drawPolyline(it) }
+                    Status.ERROR -> event.message?.let { showErrorMessage(it) }
+                }
+            }
         )
     }
 
@@ -82,7 +89,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
-    private fun drawPolyline(response: DirectionResponses) {
+    private fun drawPolyline(response: DirectionResponse) {
         val shape = response.routes?.get(0)?.overviewPolyline?.points
         val polyline = PolylineOptions().apply {
             addAll(PolyUtil.decode(shape))
@@ -90,6 +97,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             color(Color.RED)
         }
         map.addPolyline(polyline)
+    }
+
+    private fun showErrorMessage(message: String) {
+        Snackbar.make(
+            this.requireView(),
+            message,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 
     override fun onAttach(context: Context) {

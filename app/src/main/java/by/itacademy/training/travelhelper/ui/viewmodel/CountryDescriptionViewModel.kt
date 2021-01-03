@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import by.itacademy.training.travelhelper.model.domain.Country
 import by.itacademy.training.travelhelper.model.domain.Route
-import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
+import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponse
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
 import by.itacademy.training.travelhelper.model.repository.DirectionsRepositoryImpl
 import by.itacademy.training.travelhelper.ui.app.App
@@ -20,7 +20,7 @@ class CountryDescriptionViewModel(application: Application) : AndroidViewModel(a
     private val directionsRepository = DirectionsRepositoryImpl()
 
     var currentCountry: LiveData<Event<Country>> = MutableLiveData()
-    var direction: LiveData<DirectionResponses> = MutableLiveData()
+    var direction: LiveData<Event<DirectionResponse>> = MutableLiveData()
     private var _route = MutableLiveData<Route>()
     val route: LiveData<Route> = _route
 
@@ -44,8 +44,9 @@ class CountryDescriptionViewModel(application: Application) : AndroidViewModel(a
         direction = liveData {
             try {
                 val result = directionsRepository.getDirection(url)
-                emit(result)
+                emit(Event.success(result))
             } catch (e: Exception) {
+                emit(Event.error(null, e.message))
             }
         }
     }

@@ -2,7 +2,7 @@ package by.itacademy.training.travelhelper.model.dto.maps
 
 import com.google.gson.annotations.SerializedName
 
-data class DirectionResponses(
+data class DirectionResponse(
     @SerializedName("geocoded_waypoints")
     var geoCodedWayPoints: List<GeocodedWaypoint?>?,
     @SerializedName("routes")
