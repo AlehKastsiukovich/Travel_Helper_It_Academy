@@ -4,5 +4,5 @@ import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
 
 interface DirectionsRepository {
 
-    fun getDirection(url: String): DirectionResponses
+    suspend fun getDirection(url: String): DirectionResponses
 }

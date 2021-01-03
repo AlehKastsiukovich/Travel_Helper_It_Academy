@@ -1,16 +1,17 @@
 package by.itacademy.training.travelhelper.ui.view
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import by.itacademy.training.travelhelper.R
-import by.itacademy.training.travelhelper.databinding.FragmentMapsBinding
+import by.itacademy.training.travelhelper.model.domain.Route
 import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
+import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,20 +20,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Url
+import javax.inject.Inject
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var binding: FragmentMapsBinding
+    @Inject lateinit var model: CountryDescriptionViewModel
+
+    private lateinit var route: Route
     private lateinit var map: GoogleMap
-    private lateinit var fkip: LatLng
-    private lateinit var monas: LatLng
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,73 +43,62 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        (activity as CountryActivity).model.currentCountry.observe(
-            viewLifecycleOwner,
-            Observer {
-                val routs = it.data?.routs
-            }
-        )
-
-        fkip = LatLng(-6.3037978, 106.8693713)
-        monas = LatLng(-6.1890511, 106.8251573)
+        initCurrentRoute()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        val markerFkip = MarkerOptions()
-            .position(fkip)
-            .title("FKIP")
-        val markerMonas = MarkerOptions()
-            .position(monas)
-            .title("Monas")
+        addMarkersToMap()
+        model.direction.observe(
+            viewLifecycleOwner, { directionResponses -> drawPolyline(directionResponses) }
+        )
+    }
 
-        map.addMarker(markerFkip)
-        map.addMarker(markerMonas)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(monas, 12f))
-
-        val fromFKIP = fkip.latitude.toString() + "," + fkip.longitude.toString()
-        val toMonas = monas.latitude.toString() + "," + monas.longitude.toString()
-
-        lifecycleScope.launch() {
-            val result = getResponse()
-            drawPolyline(result)
+    private fun addMarkersToMap() {
+        if (route.markers.isNotEmpty()) {
+            route.markers.forEach { marker ->
+                val markerOptions = MarkerOptions().apply {
+                    title(marker.title)
+                    position(LatLng(marker.latitude, marker.longitude))
+                }
+                map.addMarker(markerOptions)
+            }
+            setCameraView()
         }
     }
 
-    private suspend fun getResponse() = withContext(Dispatchers.IO) {
-        val apiServices = RetrofitClient.apiServices()
-        apiServices.getDirection(url)
+    private fun setCameraView() {
+        map.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(route.markers[0].latitude, route.markers[0].longitude), DEFAULT_MAP_ZOOM
+            )
+        )
+    }
+
+    private fun initCurrentRoute() {
+        model.route.observe(
+            viewLifecycleOwner, { route = it }
+        )
     }
 
     private fun drawPolyline(response: DirectionResponses) {
         val shape = response.routes?.get(0)?.overviewPolyline?.points
-
-        val polyline = PolylineOptions()
-            .addAll(PolyUtil.decode(shape))
-            .width(8f)
-            .color(Color.RED)
+        val polyline = PolylineOptions().apply {
+            addAll(PolyUtil.decode(shape))
+            width(POLYLINE_WIDTH)
+            color(Color.RED)
+        }
         map.addPolyline(polyline)
     }
 
-    private interface MapApiService {
-        @GET
-        suspend fun getDirection(@Url str: String): DirectionResponses
-    }
-
-    private object RetrofitClient {
-        fun apiServices(): MapApiService {
-            val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://maps.googleapis.com")
-                .build()
-
-            return retrofit.create(MapApiService::class.java)
-        }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as CountryActivity).component.inject(this)
     }
 
     companion object {
-        const val path = "json?origin=-6.3037978, 106.8693713&destination=-6.1890511, 106.8251573&key=AIzaSyB9x61iotYLzMuPA810UlnJefQ_-wh8oF8"
-        const val url = "/maps/api/directions/json?origin=-6.3037978, 106.8693713&destination=-6.1890511, 106.8251573&key=AIzaSyB9x61iotYLzMuPA810UlnJefQ_-wh8oF8"
+        private const val DEFAULT_MAP_ZOOM = 6f
+        private const val POLYLINE_WIDTH = 8f
     }
 }

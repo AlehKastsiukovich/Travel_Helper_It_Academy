@@ -4,7 +4,7 @@ import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
 import retrofit2.http.GET
 import retrofit2.http.Url
 
-private interface MapApiService {
+interface MapApiService {
     @GET
-    suspend fun getDirection(@Url str: String): DirectionResponses
+    suspend fun getDirection(@Url url: String): DirectionResponses
 }

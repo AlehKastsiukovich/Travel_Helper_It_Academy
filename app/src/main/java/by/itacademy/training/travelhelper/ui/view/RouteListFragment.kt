@@ -1,5 +1,6 @@
 package by.itacademy.training.travelhelper.ui.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,12 @@ import by.itacademy.training.travelhelper.databinding.FragmentRoutListBinding
 import by.itacademy.training.travelhelper.model.domain.Route
 import by.itacademy.training.travelhelper.ui.adapter.OnRouteClickListener
 import by.itacademy.training.travelhelper.ui.adapter.RoutsAdapter
-import kotlinx.android.synthetic.main.activity_country.view.fragmentsContainer
+import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
+import javax.inject.Inject
 
 class RouteListFragment : Fragment(), OnRouteClickListener {
+
+    @Inject lateinit var model: CountryDescriptionViewModel
 
     private lateinit var binding: FragmentRoutListBinding
 
@@ -37,6 +41,7 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
     }
 
     override fun onRouteClick(route: Route) {
+        model.setCurrentRoute(route)
         activity?.run {
             supportFragmentManager
                 .beginTransaction()
@@ -64,5 +69,10 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
                 }
             }
         )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as CountryActivity).component.inject(this)
     }
 }

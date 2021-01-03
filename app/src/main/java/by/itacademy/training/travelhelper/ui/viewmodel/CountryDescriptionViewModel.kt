@@ -6,7 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import by.itacademy.training.travelhelper.model.domain.Country
+import by.itacademy.training.travelhelper.model.domain.Route
+import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponses
 import by.itacademy.training.travelhelper.model.repository.CountriesRepository
+import by.itacademy.training.travelhelper.model.repository.DirectionsRepositoryImpl
 import by.itacademy.training.travelhelper.ui.app.App
 import by.itacademy.training.travelhelper.util.Event
 import javax.inject.Inject
@@ -14,8 +17,12 @@ import javax.inject.Inject
 class CountryDescriptionViewModel(application: Application) : AndroidViewModel(application) {
 
     @Inject lateinit var repository: CountriesRepository
+    private val directionsRepository = DirectionsRepositoryImpl()
 
-    var currentCountry: LiveData<Event<Country>> = MutableLiveData<Event<Country>>()
+    var currentCountry: LiveData<Event<Country>> = MutableLiveData()
+    var direction: LiveData<DirectionResponses> = MutableLiveData()
+    private var _route = MutableLiveData<Route>()
+    val route: LiveData<Route> = _route
 
     init {
         (application as App).appComponent.inject(this)
@@ -31,5 +38,20 @@ class CountryDescriptionViewModel(application: Application) : AndroidViewModel(a
                 emit(Event.error(null, e.message))
             }
         }
+    }
+
+    private fun setCurrentDirection(url: String) {
+        direction = liveData {
+            try {
+                val result = directionsRepository.getDirection(url)
+                emit(result)
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    fun setCurrentRoute(route: Route) {
+        setCurrentDirection(route.request)
+        _route.value = route
     }
 }
