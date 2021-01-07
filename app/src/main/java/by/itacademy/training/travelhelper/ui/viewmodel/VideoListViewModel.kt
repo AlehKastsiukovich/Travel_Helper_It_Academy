@@ -1,6 +1,7 @@
 package by.itacademy.training.travelhelper.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,9 +31,11 @@ class VideoListViewModel @Inject constructor(
 
     fun fetchVideosByCountry(countryName: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _videoList.postValue(
-                repository.getVideos("travelling $countryName", key)
-            )
+            try {
+                val result = repository.getVideos("travelling $countryName", key)
+                _videoList.postValue(result)
+            } catch (e: Exception) {
+            }
         }
     }
 }

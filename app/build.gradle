@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.androidmapsextensions:android-maps-extensions:2.4.0'
     implementation "io.coil-kt:coil:1.1.0"
     implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
