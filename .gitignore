@@ -95,6 +95,9 @@ obj/
 *.iws
 /out/
 
+
+secure.properties
+
 # User-specific configurations
 .idea/caches/
 .idea/libraries/
