@@ -1,6 +1,7 @@
 package by.itacademy.training.travelhelper.ui.view
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,12 @@ import by.itacademy.training.travelhelper.databinding.FragmentCountryDescription
 import by.itacademy.training.travelhelper.domain.Country
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import by.itacademy.training.travelhelper.util.Status
+import coil.load
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -49,8 +55,12 @@ class CountryDescriptionFragment : Fragment() {
     }
 
     private fun viewCountryDescription(country: Country) {
+        viewProgressBar()
         setDescriptionImage(country)
         setDescriptionText(country)
+    }
+
+    private fun hideProgressBar() {
         with(binding) {
             progressBar.visibility = View.INVISIBLE
             mainLayout.visibility = View.VISIBLE
@@ -86,9 +96,33 @@ class CountryDescriptionFragment : Fragment() {
     }
 
     private fun setDescriptionImage(country: Country) {
+        viewProgressBar()
         Glide.with(this)
             .load(country.descriptionImageUrl)
             .centerCrop()
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    hideProgressBar()
+                    e?.message?.let { showErrorMessage(it) }
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    hideProgressBar()
+                    return false
+                }
+            })
             .into(binding.countryDescriptionImage)
     }
 
