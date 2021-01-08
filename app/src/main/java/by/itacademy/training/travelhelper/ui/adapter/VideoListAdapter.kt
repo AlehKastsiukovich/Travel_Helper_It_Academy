@@ -25,7 +25,7 @@ class VideoListAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: VideoListViewHolder, position: Int) {
-        holder.bind(videoList[position])
+        holder.bind(videoList[position], position)
     }
 
     override fun getItemCount() = videoList.size
@@ -42,10 +42,12 @@ class VideoListAdapter @Inject constructor(
         private val binding = ItemVideoBinding.bind(itemView)
         private val player = binding.youtubePlayer
         private val title = binding.videoTitleTextView
+        private val chanelTitle = binding.chanelTitleTextView
 
-        fun bind(item: ItemDto) {
-            youtubePlayerListener.listen(item, player)
+        fun bind(item: ItemDto, position: Int) {
+            youtubePlayerListener.listenCurrentVideo(item, player, position)
             title.text = item.snippet.title
+            chanelTitle.text = item.snippet.channelTitle
         }
     }
 }

@@ -1,6 +1,7 @@
 package by.itacademy.training.travelhelper.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,7 +71,11 @@ class VideoListFragment : Fragment(), YoutubePlayerListener {
         )
     }
 
-    override fun listen(item: ItemDto, youTubePlayerView: YouTubePlayerView) {
+    override fun listenCurrentVideo(
+        item: ItemDto,
+        youTubePlayerView: YouTubePlayerView,
+        position: Int
+    ) {
         lifecycle.addObserver(youTubePlayerView)
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {

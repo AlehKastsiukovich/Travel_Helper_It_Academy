@@ -5,5 +5,5 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 interface YoutubePlayerListener {
 
-    fun listen(item: ItemDto, youTubePlayerView: YouTubePlayerView)
+    fun listenCurrentVideo(item: ItemDto, youTubePlayerView: YouTubePlayerView, position: Int)
 }
