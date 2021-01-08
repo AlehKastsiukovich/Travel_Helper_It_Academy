@@ -1,5 +1,6 @@
 package by.itacademy.training.travelhelper.ui.view
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -11,7 +12,9 @@ import androidx.lifecycle.observe
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.domain.Route
 import by.itacademy.training.travelhelper.model.dto.maps.DirectionResponse
+import by.itacademy.training.travelhelper.ui.adapter.MarkerInfoWindowAdapter
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
+import by.itacademy.training.travelhelper.util.MarkerHelper
 import by.itacademy.training.travelhelper.util.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,6 +30,7 @@ import javax.inject.Inject
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
     @Inject lateinit var model: CountryDescriptionViewModel
+    @Inject lateinit var markerHelper: MarkerHelper
 
     private lateinit var route: Route
     private lateinit var map: GoogleMap
@@ -53,13 +57,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         addMarkersToMap()
         model.direction.observe(
-            viewLifecycleOwner, { event ->
-                when(event.status) {
+            viewLifecycleOwner,
+            { event ->
+                when (event.status) {
                     Status.SUCCESS -> event.data?.let { drawPolyline(it) }
                     Status.ERROR -> event.message?.let { showErrorMessage(it) }
                 }
             }
         )
+
+        map.setInfoWindowAdapter(MarkerInfoWindowAdapter((activity as Activity), markerHelper))
     }
 
     private fun addMarkersToMap() {
@@ -67,6 +74,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             route.markers.forEach { marker ->
                 val markerOptions = MarkerOptions().apply {
                     title(marker.title)
+                    snippet(marker.description)
                     position(LatLng(marker.latitude, marker.longitude))
                 }
                 map.addMarker(markerOptions)
@@ -94,7 +102,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val polyline = PolylineOptions().apply {
             addAll(PolyUtil.decode(shape))
             width(POLYLINE_WIDTH)
-            color(Color.RED)
+            color(Color.BLUE)
         }
         map.addPolyline(polyline)
     }

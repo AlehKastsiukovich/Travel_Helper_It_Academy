@@ -30,9 +30,11 @@ class VideoListViewModel @Inject constructor(
 
     fun fetchVideosByCountry(countryName: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _videoList.postValue(
-                repository.getVideos("travelling $countryName", key)
-            )
+            try {
+                val result = repository.getVideos("travelling $countryName", key)
+                _videoList.postValue(result)
+            } catch (e: Exception) {
+            }
         }
     }
 }
