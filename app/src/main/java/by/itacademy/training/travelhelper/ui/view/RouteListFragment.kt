@@ -21,7 +21,6 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
     @Inject lateinit var routsAdapter: RoutsAdapter
 
     private lateinit var binding: FragmentRoutListBinding
-    private val mapsFragment = MapsFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,14 +39,15 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
 
     override fun onRouteClick(route: Route) {
         model.setCurrentRoute(route)
+        val mapFragment = MapsFragment()
         activity?.run {
             supportFragmentManager
                 .beginTransaction()
-                .hide(this@RouteListFragment)
-                .add(R.id.fragmentsContainer, mapsFragment)
+                .add(R.id.fragmentsContainer, mapFragment)
                 .addToBackStack(null)
                 .commit()
         }
+        setCurrentFragment(mapFragment)
     }
 
     private fun setUpRecyclerView() {
@@ -77,5 +77,9 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
             .with(this)
             .build()
             .inject(this)
+    }
+
+    private fun setCurrentFragment(fragment: MapsFragment) {
+        (activity as CountryActivity).setCurrentFragment(fragment)
     }
 }

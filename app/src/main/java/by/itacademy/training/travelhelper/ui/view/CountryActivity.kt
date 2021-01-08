@@ -20,7 +20,7 @@ class CountryActivity : AppCompatActivity() {
     private lateinit var currentFragment: Fragment
     private lateinit var countryDescriptionFragment: CountryDescriptionFragment
     private lateinit var videoListFragment: VideoListFragment
-    private lateinit var routeListFragment: RouteTypeFragment
+    private lateinit var routeTypeFragment: RouteTypeFragment
     private lateinit var mapsFragment: MapsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,26 @@ class CountryActivity : AppCompatActivity() {
         setUpActionBar()
     }
 
+    fun setCurrentFragment(openFragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            hide(currentFragment)
+            show(openFragment)
+            commit()
+        }
+        currentFragment = openFragment
+    }
+
+    private fun onNavigationBarItemSelected() {
+        binding.bottomNavigationBar.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.countryDescription -> setCurrentFragment(countryDescriptionFragment)
+                R.id.countryInfoVideoList -> setCurrentFragment(videoListFragment)
+                R.id.routes -> setCurrentFragment(routeTypeFragment)
+            }
+            true
+        }
+    }
+
     private fun initComponent() {
         component = (application as App).appComponent
             .countryActivitySubComponentBuilder()
@@ -50,7 +70,7 @@ class CountryActivity : AppCompatActivity() {
 
     private fun initFragments() {
         countryDescriptionFragment = CountryDescriptionFragment()
-        routeListFragment = RouteTypeFragment()
+        routeTypeFragment = RouteTypeFragment()
         mapsFragment = MapsFragment()
         videoListFragment = VideoListFragment()
         currentFragment = countryDescriptionFragment
@@ -59,7 +79,7 @@ class CountryActivity : AppCompatActivity() {
     private fun addFragmentsToTransaction() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentsContainer, countryDescriptionFragment)
-            add(R.id.fragmentsContainer, routeListFragment).hide(routeListFragment).addToBackStack(null)
+            add(R.id.fragmentsContainer, routeTypeFragment).hide(routeTypeFragment).addToBackStack(null)
             add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment).addToBackStack(null)
             commit()
         }
@@ -68,26 +88,6 @@ class CountryActivity : AppCompatActivity() {
     private fun setUpActionBar() {
         setSupportActionBar(binding.appToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun onNavigationBarItemSelected() {
-        binding.bottomNavigationBar.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.countryDescription -> setCurrentFragment(countryDescriptionFragment)
-                R.id.countryInfoVideoList -> setCurrentFragment(videoListFragment)
-                R.id.routes -> setCurrentFragment(routeListFragment)
-            }
-            true
-        }
-    }
-
-    private fun setCurrentFragment(openFragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
-            hide(currentFragment)
-            show(openFragment)
-            commit()
-        }
-        currentFragment = openFragment
     }
 
     private fun setCurrentCountry() {

@@ -53,13 +53,18 @@ class RouteTypeFragment : Fragment() {
     }
 
     private fun startRouteListFragment() {
+        val routeListFragment = RouteListFragment()
         activity?.run {
             supportFragmentManager
                 .beginTransaction()
-                .hide(this@RouteTypeFragment)
-                .add(R.id.fragmentsContainer, RouteListFragment())
+                .add(R.id.fragmentsContainer, routeListFragment)
                 .addToBackStack(null)
                 .commit()
         }
+        setCurrentFragment(routeListFragment)
+    }
+
+    private fun setCurrentFragment(fragment: RouteListFragment) {
+        (activity as CountryActivity).setCurrentFragment(fragment)
     }
 }
