@@ -1,6 +1,7 @@
 package by.itacademy.training.travelhelper.app
 
 import android.app.Application
+import android.util.Log
 import by.itacademy.training.travelhelper.di.component.ApplicationComponent
 import by.itacademy.training.travelhelper.di.component.DaggerApplicationComponent
 import by.itacademy.training.travelhelper.di.module.ApplicationContextModule
@@ -44,20 +45,20 @@ class App : Application() {
     }
 
     private fun fetchFireStoreData() {
-        applicationScope.launch {
-            val countries = mutableListOf<CountryDto>()
-            firestore.collection(FIRESTORE_COUNTRY_STORAGE)
-                .get()
-                .addOnSuccessListener { task ->
-                    task.forEach { document ->
-                        val country = document.toObject(CountryDto::class.java)
-                        val routs =
-                            document.get(FIRESTORE_DOCUMENT_ROUTES) as List<Map<String, Any>>
-                        countries.add(countryDtoBuilder.buildCountryDto(routs, country))
-                    }
+        val countries = mutableListOf<CountryDto>()
+        firestore.collection(FIRESTORE_COUNTRY_STORAGE)
+            .get()
+            .addOnSuccessListener { task ->
+                task.forEach { document ->
+                    val country = document.toObject(CountryDto::class.java)
+                    val routs =
+                        document.get(FIRESTORE_DOCUMENT_ROUTES) as List<Map<String, Any>>
+                    countries.add(countryDtoBuilder.buildCountryDto(routs, country))
                 }
-            sendFireStoreDataToDatabase(countries)
-        }
+                applicationScope.launch {
+                    sendFireStoreDataToDatabase(countries)
+                }
+            }
     }
 
     private suspend fun sendFireStoreDataToDatabase(countries: List<CountryDto>) {

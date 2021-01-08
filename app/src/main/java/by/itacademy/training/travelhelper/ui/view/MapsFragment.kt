@@ -21,14 +21,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.PolyUtil
 import javax.inject.Inject
 
-class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class MapsFragment : Fragment(), OnMapReadyCallback {
 
     @Inject lateinit var model: CountryDescriptionViewModel
     @Inject lateinit var markerHelper: MarkerHelper
@@ -71,12 +70,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
     }
 
     private fun addMarkersToMap() {
-        val view = LayoutInflater.from(activity).inflate(R.layout.marker_info_layout, null)
         if (route.markers.isNotEmpty()) {
             route.markers.forEach { marker ->
                 val markerOptions = MarkerOptions().apply {
                     title(marker.title)
-                    snippet("HELLO KIDS")
+                    snippet(marker.description)
                     position(LatLng(marker.latitude, marker.longitude))
                 }
                 map.addMarker(markerOptions)
@@ -125,9 +123,5 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
     companion object {
         private const val DEFAULT_MAP_ZOOM = 6f
         private const val POLYLINE_WIDTH = 8f
-    }
-
-    override fun onInfoWindowClick(marker: Marker?) {
-        TODO("Not yet implemented")
     }
 }
