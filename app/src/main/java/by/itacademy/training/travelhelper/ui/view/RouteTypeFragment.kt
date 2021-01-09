@@ -58,7 +58,6 @@ class RouteTypeFragment : Fragment() {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragmentsContainer, routeListFragment)
-                .addToBackStack(null)
                 .commit()
         }
         setCurrentFragment(routeListFragment)

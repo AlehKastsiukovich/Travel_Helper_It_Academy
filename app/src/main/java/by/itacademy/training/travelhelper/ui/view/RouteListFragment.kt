@@ -44,7 +44,6 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragmentsContainer, mapFragment)
-                .addToBackStack(null)
                 .commit()
         }
         setCurrentFragment(mapFragment)

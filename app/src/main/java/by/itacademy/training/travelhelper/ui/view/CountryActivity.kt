@@ -1,6 +1,7 @@
 package by.itacademy.training.travelhelper.ui.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import by.itacademy.training.travelhelper.R
@@ -41,10 +42,20 @@ class CountryActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().apply {
             hide(currentFragment)
             show(openFragment)
+            addToBackStack(null)
             commit()
         }
         currentFragment = openFragment
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            android.R.id.home -> {
+                checkForCurrentFragment()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
     private fun onNavigationBarItemSelected() {
         binding.bottomNavigationBar.setOnNavigationItemSelectedListener {
@@ -74,13 +85,14 @@ class CountryActivity : AppCompatActivity() {
         mapsFragment = MapsFragment()
         videoListFragment = VideoListFragment()
         currentFragment = countryDescriptionFragment
+        setCurrentFragment(countryDescriptionFragment)
     }
 
     private fun addFragmentsToTransaction() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentsContainer, countryDescriptionFragment)
-            add(R.id.fragmentsContainer, routeTypeFragment).hide(routeTypeFragment).addToBackStack(null)
-            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment).addToBackStack(null)
+            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment)
+            add(R.id.fragmentsContainer, routeTypeFragment).hide(routeTypeFragment)
             commit()
         }
     }
@@ -88,6 +100,16 @@ class CountryActivity : AppCompatActivity() {
     private fun setUpActionBar() {
         setSupportActionBar(binding.appToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun checkForCurrentFragment() {
+        if (supportFragmentManager.backStackEntryCount > 0 &&
+            currentFragment != countryDescriptionFragment
+        ) {
+            supportFragmentManager.popBackStack()
+        } else {
+            finish()
+        }
     }
 
     private fun setCurrentCountry() {

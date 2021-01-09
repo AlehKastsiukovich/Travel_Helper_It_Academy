@@ -12,7 +12,6 @@ import by.itacademy.training.travelhelper.databinding.FragmentCountryDescription
 import by.itacademy.training.travelhelper.domain.Country
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import by.itacademy.training.travelhelper.util.Status
-import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
