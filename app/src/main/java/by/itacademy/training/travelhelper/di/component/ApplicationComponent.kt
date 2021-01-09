@@ -1,11 +1,11 @@
 package by.itacademy.training.travelhelper.di.component
 
+import by.itacademy.training.travelhelper.app.App
 import by.itacademy.training.travelhelper.di.module.ApplicationContextModule
 import by.itacademy.training.travelhelper.di.module.FirebaseModule
 import by.itacademy.training.travelhelper.di.module.NetworkModule
 import by.itacademy.training.travelhelper.di.module.RepositoryModule
 import by.itacademy.training.travelhelper.di.module.RoomModule
-import by.itacademy.training.travelhelper.app.App
 import by.itacademy.training.travelhelper.ui.viewmodel.CountriesListViewModel
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
 import by.itacademy.training.travelhelper.ui.viewmodel.VideoListViewModel
