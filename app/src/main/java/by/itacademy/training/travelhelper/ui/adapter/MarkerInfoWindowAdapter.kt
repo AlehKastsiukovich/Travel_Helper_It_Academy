@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.View
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.MarkerInfoLayoutBinding
-import by.itacademy.training.travelhelper.util.MarkerHelper
+import by.itacademy.training.travelhelper.util.MapPositionHelper
 import coil.imageLoader
 import coil.request.ImageRequest
 import com.google.android.gms.maps.GoogleMap
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class MarkerInfoWindowAdapter @Inject constructor(
     private val context: Context,
-    private val markerHelper: MarkerHelper
+    private val markerHelper: MapPositionHelper
 ) : GoogleMap.InfoWindowAdapter {
 
     private val view: View = (context as Activity).layoutInflater
