@@ -48,7 +48,7 @@ class RoutsAdapter @Inject constructor(
         fun bind(route: Route) {
             view.setOnClickListener { onRouteClickListener.onRouteClick(route) }
             with(binding) {
-                routeImage.load("https://upload.wikimedia.org/wikipedia/commons/f/ff/Route_66_at_Roy%27s.jpg") {
+                routeImage.load(route.imageUrl) {
                     error(R.drawable.ic_baseline_image_24_placeholder)
                 }
                 routeTitleText.text = route.title
