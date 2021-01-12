@@ -1,7 +1,6 @@
 package by.itacademy.training.travelhelper.app
 
 import android.app.Application
-import android.util.Log
 import by.itacademy.training.travelhelper.di.component.ApplicationComponent
 import by.itacademy.training.travelhelper.di.component.DaggerApplicationComponent
 import by.itacademy.training.travelhelper.di.module.ApplicationContextModule
