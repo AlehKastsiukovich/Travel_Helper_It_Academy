@@ -20,4 +20,5 @@
     <string name="by_car">By car</string>
     <string name="hiking">Hiking</string>
     <string name="default_text">Default text</string>
+    <string name="choose_your_route_type">Choose your route type:</string>
 </resources>

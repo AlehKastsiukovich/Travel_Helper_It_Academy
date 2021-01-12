@@ -20,7 +20,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
          <item name="theme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
-        <item name="android:background">#101849</item>
+        <item name="android:background">@color/deep_blue</item>
     </style>
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif</item>

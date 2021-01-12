@@ -166,8 +166,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         with(locationClient) {
             requestLocationUpdates(locationRequest, callback, null)
-            lastLocation?.addOnSuccessListener {
-                addCurrentPositionMarker(it)
+            lastLocation?.addOnSuccessListener { location ->
+                location?.let { addCurrentPositionMarker(it) }
             }
         }
     }

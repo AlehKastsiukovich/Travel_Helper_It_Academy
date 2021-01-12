@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_bar_color">#272B43</color>
     <color name="ultimate_grey">#A3A4A6</color>
+    <color name="deep_blue">#101849</color>
 </resources>
