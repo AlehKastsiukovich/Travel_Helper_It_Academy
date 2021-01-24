@@ -5,12 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import by.itacademy.training.travelhelper.model.dto.CountryDto
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CountriesDao {
 
     @Query("SELECT * FROM countries")
-    suspend fun getAllCountries(): List<CountryDto>
+    fun getAllCountries(): Flow<List<CountryDto>>
 
     @Query("DELETE FROM countries")
     suspend fun deleteAllCountries()
