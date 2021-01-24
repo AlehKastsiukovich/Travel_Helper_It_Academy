@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentRouteTypeBinding
 import coil.load
@@ -18,7 +19,7 @@ class RouteTypeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRouteTypeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -51,17 +52,7 @@ class RouteTypeFragment : Fragment() {
     }
 
     private fun startRouteListFragment() {
-        val routeListFragment = RouteListFragment()
-        activity?.run {
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragmentsContainer, routeListFragment)
-                .commit()
-        }
-        setCurrentFragment(routeListFragment)
-    }
-
-    private fun setCurrentFragment(fragment: RouteListFragment) {
-        (activity as CountryActivity).setCurrentFragment(fragment)
+        Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+            .navigate(R.id.action_routeTypeFragment_to_routeListFragment, null)
     }
 }

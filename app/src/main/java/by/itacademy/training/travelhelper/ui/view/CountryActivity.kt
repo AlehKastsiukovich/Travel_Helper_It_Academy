@@ -1,14 +1,18 @@
 package by.itacademy.training.travelhelper.ui.view
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.app.App
-import by.itacademy.training.travelhelper.databinding.ActivityCountryBinding
 import by.itacademy.training.travelhelper.di.component.CountryActivityComponent
 import by.itacademy.training.travelhelper.ui.viewmodel.CountryDescriptionViewModel
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
 
 class CountryActivity : AppCompatActivity() {
@@ -16,57 +20,20 @@ class CountryActivity : AppCompatActivity() {
     @Inject lateinit var model: CountryDescriptionViewModel
 
     lateinit var component: CountryActivityComponent
-
-    private lateinit var binding: ActivityCountryBinding
-    private lateinit var currentFragment: Fragment
-    private lateinit var countryDescriptionFragment: CountryDescriptionFragment
-    private lateinit var videoListFragment: VideoListFragment
-    private lateinit var routeTypeFragment: RouteTypeFragment
-    private lateinit var mapsFragment: MapsFragment
+    private lateinit var controller: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCountryBinding.inflate(layoutInflater)
         initComponent()
         inject()
-        setContentView(binding.root)
-
-        setCurrentCountry()
-        initFragments()
-        addFragmentsToTransaction()
-        onNavigationBarItemSelected()
+        setContentView(R.layout.activity_country)
+        initNavController()
+        setUpBottomNavigationBar()
         setUpActionBar()
+        setCurrentCountry()
     }
 
-    fun setCurrentFragment(openFragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
-            hide(currentFragment)
-            show(openFragment)
-            addToBackStack(null)
-            commit()
-        }
-        currentFragment = openFragment
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) =
-        when (item.itemId) {
-            android.R.id.home -> {
-                checkForCurrentFragment()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    private fun onNavigationBarItemSelected() {
-        binding.bottomNavigationBar.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.countryDescription -> setCurrentFragment(countryDescriptionFragment)
-                R.id.countryInfoVideoList -> setCurrentFragment(videoListFragment)
-                R.id.routes -> setCurrentFragment(routeTypeFragment)
-            }
-            true
-        }
-    }
+    override fun onSupportNavigateUp() = controller.navigateUp() || super.onSupportNavigateUp()
 
     private fun initComponent() {
         component = (application as App).appComponent
@@ -75,41 +42,25 @@ class CountryActivity : AppCompatActivity() {
             .build()
     }
 
-    private fun inject() {
-        component.inject(this)
-    }
-
-    private fun initFragments() {
-        countryDescriptionFragment = CountryDescriptionFragment()
-        routeTypeFragment = RouteTypeFragment()
-        mapsFragment = MapsFragment()
-        videoListFragment = VideoListFragment()
-        currentFragment = countryDescriptionFragment
-        setCurrentFragment(countryDescriptionFragment)
-    }
-
-    private fun addFragmentsToTransaction() {
-        supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentsContainer, countryDescriptionFragment)
-            add(R.id.fragmentsContainer, videoListFragment).hide(videoListFragment)
-            add(R.id.fragmentsContainer, routeTypeFragment).hide(routeTypeFragment)
-            commit()
-        }
+    private fun initNavController() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        controller = navHostFragment.navController
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.appToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val appBarConfiguration = AppBarConfiguration(controller.graph)
+        findViewById<MaterialToolbar>(R.id.appToolbar)
+            .setupWithNavController(controller, appBarConfiguration)
     }
 
-    private fun checkForCurrentFragment() {
-        if (supportFragmentManager.backStackEntryCount > 0 &&
-            currentFragment != countryDescriptionFragment
-        ) {
-            supportFragmentManager.popBackStack()
-        } else {
-            finish()
-        }
+    private fun setUpBottomNavigationBar() {
+        val navigation = findViewById<BottomNavigationView>(R.id.bottomNavigationBar)
+        NavigationUI.setupWithNavController(navigation, controller)
+    }
+
+    private fun inject() {
+        component.inject(this)
     }
 
     private fun setCurrentCountry() {

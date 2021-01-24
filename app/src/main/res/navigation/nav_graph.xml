@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/countryDescriptionFragment">
 
+    <fragment
+        android:id="@+id/countryDescriptionFragment"
+        android:name="by.itacademy.training.travelhelper.ui.view.CountryDescriptionFragment">
+        <action
+            android:id="@+id/action_countryDescriptionFragment_to_videoListFragment"
+            app:destination="@id/videoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoListFragment"
+        android:name="by.itacademy.training.travelhelper.ui.view.VideoListFragment" >
+        <action
+            android:id="@+id/action_videoListFragment_to_routeTypeFragment"
+            app:destination="@id/routeTypeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeTypeFragment"
+        android:name="by.itacademy.training.travelhelper.ui.view.RouteTypeFragment" >
+        <action
+            android:id="@+id/action_routeTypeFragment_to_routeListFragment"
+            app:destination="@id/routeListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeListFragment"
+        android:name="by.itacademy.training.travelhelper.ui.view.RouteListFragment"
+        tools:layout="@layout/fragment_rout_list" >
+        <action
+            android:id="@+id/action_routeListFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="by.itacademy.training.travelhelper.ui.view.MapsFragment"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

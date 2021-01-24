@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.FragmentRoutListBinding
@@ -26,7 +27,7 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRoutListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,14 +40,14 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
 
     override fun onRouteClick(route: Route) {
         model.setCurrentRoute(route)
-        val mapFragment = MapsFragment()
         activity?.run {
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragmentsContainer, mapFragment)
-                .commit()
+            openMapWithRoute()
         }
-        setCurrentFragment(mapFragment)
+    }
+
+    private fun openMapWithRoute() {
+        Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+            .navigate(R.id.action_routeListFragment_to_mapsFragment, null)
     }
 
     private fun setUpRecyclerView() {
@@ -76,9 +77,5 @@ class RouteListFragment : Fragment(), OnRouteClickListener {
             .with(this)
             .build()
             .inject(this)
-    }
-
-    private fun setCurrentFragment(fragment: MapsFragment) {
-        (activity as CountryActivity).setCurrentFragment(fragment)
     }
 }

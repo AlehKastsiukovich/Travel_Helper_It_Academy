@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/countryDescription"
+        android:id="@+id/countryDescriptionFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:enabled="true"
         android:title="@string/about_menu" />
     <item
-        android:id="@+id/countryInfoVideoList"
+        android:id="@+id/videoListFragment"
         android:icon="@drawable/ic_baseline_video_library_24"
         android:enabled="true"
         android:title="@string/video_menu" />
     <item
-        android:id="@+id/routes"
+        android:id="@+id/routeTypeFragment"
         android:icon="@drawable/ic_baseline_map_24"
         android:enabled="true"
         android:title="@string/routs_menu" />
