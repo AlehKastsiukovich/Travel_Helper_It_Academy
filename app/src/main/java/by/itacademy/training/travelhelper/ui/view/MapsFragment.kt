@@ -201,8 +201,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     companion object {
+        const val POSITION_MARKER_TITLE = "Your position"
         private const val LOCATION_PERMISSION_CODE = 9999
-        private const val POSITION_MARKER_TITLE = "Your position"
         private const val DEFAULT_MAP_ZOOM = 7f
         private const val POLYLINE_WIDTH = 9f
     }

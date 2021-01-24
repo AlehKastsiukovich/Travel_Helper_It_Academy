@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import by.itacademy.training.travelhelper.R
 import by.itacademy.training.travelhelper.databinding.MarkerInfoLayoutBinding
+import by.itacademy.training.travelhelper.ui.view.MapsFragment
 import by.itacademy.training.travelhelper.util.MapPositionHelper
 import coil.imageLoader
 import coil.request.ImageRequest
@@ -30,12 +31,14 @@ class MarkerInfoWindowAdapter @Inject constructor(
     }
 
     override fun getInfoContents(marker: Marker?): View {
-        val dataPair = markerHelper.splitMarkerText(marker?.title)
-        with(binding) {
-            markerTitleTextView.text = dataPair.first
-            markerDescriptionTextView.text = marker?.snippet
+        if (marker?.title != MapsFragment.POSITION_MARKER_TITLE) {
+            val dataPair = markerHelper.splitMarkerText(marker?.title)
+            with(binding) {
+                markerTitleTextView.text = dataPair.first
+                markerDescriptionTextView.text = marker?.snippet
+            }
+            loadImage(marker, dataPair.second)
         }
-        loadImage(marker, dataPair.second)
         return view
     }
 
