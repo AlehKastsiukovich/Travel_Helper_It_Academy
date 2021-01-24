@@ -47,8 +47,6 @@ class RouteTypeFragment : Fragment() {
                     startRouteListFragment()
                 }
             }
-
-            hikingView.setOnClickListener { }
         }
     }
 
